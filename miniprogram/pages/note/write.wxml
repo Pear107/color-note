@@ -18,7 +18,7 @@
     </view>
   </view>
   <view class="c-variety f-border-radius-big" wx:if="{{isShowVariety}}">
-    <view class="c-variety__item" wx:for="{{varieties}}" wx:key="index" style="--color:{{item.color}}"  data-name="{{item.name}}" data-color="{{item.color}}" bindtap="selectVariety">{{item.name}}</view>
+    <view class="c-variety__item" wx:for="{{varieties}}" wx:key="index" style="--color:{{item.Color}}"  data-name="{{item.NoteBookName}}" data-id="{{item.NoteBookId}}" data-color="{{item.Color}}" bindtap="selectVariety">{{item.NoteBookName}}</view>
     <view class="c-variety__item" data-name="未分类" data-color="" bindtap="selectVariety">未分类</view>
     <view class="c-variety__item">添加分类</view>
   </view>

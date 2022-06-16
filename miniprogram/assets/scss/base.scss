@@ -1,7 +1,8 @@
-page{
+page {
   width: 100vw;
   height: 100vh;
 }
+
 .container {
   display: flex;
   flex-direction: column;
@@ -11,17 +12,20 @@ page{
   background: var(--bg-color);
 }
 
-.f-box-shadow{
+.f-box-shadow {
   box-shadow: 0rpx 5rpx 15rpx -3rpx var(--shadow-color-gray);
 }
-.f-border-radius{
+
+.f-border-radius {
   border-radius: 8rpx;
 }
-.f-border-radius-big{
-  border: radius 16rpx ;
+
+.f-border-radius-big {
+  border: radius 16rpx;
 }
-.f-ellipsis{
-  padding-right:20rpx ;
+
+.f-ellipsis {
+  padding-right: 20rpx;
   box-sizing: border-box;
   overflow: hidden;
   text-overflow: ellipsis;

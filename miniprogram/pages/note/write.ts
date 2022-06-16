@@ -14,17 +14,23 @@ const app = getApp()
 Component({
   data: {
     CustomBar: app.globalData.CustomBar,
-    varieties: app.globalData.varieties,
+    varieties: [],
     variety:'未分类',
+    oldVarietyId:0,
+    varietyId:0,
     color:'',
     datetime: '',
     id:'',
+    oldTitle:'',
     title:'',
     isShowVariety: false,
     isShowToast: false                                                
   },
   lifetimes: {
     attached() {
+      this.setData({
+        varieties:app.globalData.varieties
+      })
       plugin.init({
         appid: "TWBy1YUYKJTgRLmVdWre06IutAQY6c",
         openid: wx.getStorageSync('openid'), // 小程序的openid，必填项
@@ -195,7 +201,8 @@ Component({
       console.log(e.currentTarget.dataset)
       this.setData({
         variety:e.currentTarget.dataset.name,
-        color:e.currentTarget.dataset.color
+        color:e.currentTarget.dataset.color,
+        varietyId:e.currentTarget.dataset.id
       })
     },
     showToast(){
@@ -216,14 +223,22 @@ Component({
     getNote(){
       const that=this
       CustomPromise.all([CustomRequest('GET',`/note/${this.data.id}`,{})]).then((res:any)=>{
-        console.log(res[0])
-        that.setContents(res[0].delta)
+        that.setContents(JSON.parse(res[0].delta))
         that.setData({
-          title:res[0].info.NoteName
+          title:res[0].info.NoteName,
+          oldTitle:res[0].info.NoteName,
+          varietyId:res[0].info.NoteBookId,
+          oldVarietyId:res[0].info.NoteBookId
         })
-
+        that.data.varieties.forEach((item:any)=>{
+          if(item.NoteBookId===that.data.varietyId){
+            that.setData({
+              color:item.Color
+            })
+          }
+        })
       },(err:any)=>{
-
+        console.log(err)
       })
     },
     save() {
@@ -248,27 +263,41 @@ Component({
           resolve(res)
         })
       }).then((value: any) => {
-        console.log(value.delta)
-        let delta =value.delta.ops
-        console.log(typeof delta)
-        console.log(delta.toString())
+        console.log(JSON.stringify(value.delta))
+        let delta =JSON.stringify(value.delta)
+        console.log(JSON.stringify(value.delta))
         return CustomRequest('PUT', `/note/update/delta/${that.data.id}`, { 
-          "delta":value.delta
+          delta
          })
       }, (error: any) => {
         console.log(error)
       }).then((res:any)=>{
         console.log(res)
-        return CustomRequest('PUT',`/note/update/name/${that.data.id}`,{
-          "new_notename":that.data.title
-        })
+        if(that.data.oldTitle!==that.data.title){
+          return CustomRequest('PUT',`/note/update/name/${that.data.id}`,{
+            "new_notename":that.data.title
+          })
+        }
+        return 0;
       },(err:any)=>{
-
-      }).then((value: any) => {
-        console.log(value)
+        console.log(err)
+      }).then((res:any)=>{
+        console.log('noteBookId')
+        console.log(that.data.varietyId)
+        console.log(res)
+        if(that.data.oldVarietyId!==that.data.varietyId){
+          return CustomRequest('PUT',`/note/update/notebook/${that.data.id}`,{
+            "new_notebookid":that.data.varietyId
+          })
+        }
+        return 0;
+      },(err:any)=>{
+        console.log(err)
+      }).then((res: any) => {
+        console.log(res)
         wx.showToast({
           title: '上传成功',
-          icon: 'success',
+          icon: 'success', 
           duration: 500
         })
         setTimeout(() => {

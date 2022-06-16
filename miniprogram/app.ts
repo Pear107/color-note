@@ -13,22 +13,7 @@ App<IAppOption>({
     avatarUrl:'',
     token:'',
     varieties:[
-      {
-        "name":"生活",
-        "color":"#c88f23"
-      },{
-        "name":"工作",
-        "color":"#b99192"
-      },{
-        "name":"学习",
-        "color":"#b5c07b"
-      },{
-        "name":"后端",
-        "color":"#dd8270"
-      },{
-        "name":"前端",
-        "color":"#bccdbb"
-      }
+      
     ]
   },
   onLaunch() {

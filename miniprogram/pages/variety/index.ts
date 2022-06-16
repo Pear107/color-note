@@ -80,17 +80,19 @@ Component({
       if(that.data.newVarietyName!==that.data.oldVarietyName){
         console.log(that.data.newVarietyName)
         CustomPromise.all([CustomRequest('PUT',`/notebook/update/name/${that.data.varietyId}`,{'new_name':that.data.newVarietyName})]).then((res:any)=>{
+          console.log(res)
           that.getVarieties()
         },(err:any)=>{
-
+          console.log(err)
         })
       }
       if(that.data.colorIndex!==that.data.oldColorIndex){
         console.log(that.data.colorArray[that.data.colorIndex])
         CustomPromise.all([CustomRequest('PUT',`/notebook/update/color/${that.data.varietyId}`,{'new_color':that.data.colorArray[that.data.colorIndex]})]).then((res:any)=>{
+          console.log(res)
           that.getVarieties()
         },(err:any)=>{
-
+          console.log(err)
         })
       }
       
@@ -140,6 +142,7 @@ Component({
         this.setData({
           varieties:res[0].data
         })
+        app.globalData.varieties=res[0].data
         console.log(this.data.varieties)
       }, (err: any) => {
         console.log(err)

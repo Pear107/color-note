@@ -1,7 +1,6 @@
 // pages/note/index.ts
 import CustomPromise from '../../utils/customPromise';
 import CustomRequest from '../../utils/customRequest';
-import noteList from '../variety/noteList';
 const app=getApp()
 
 Component({
@@ -50,7 +49,6 @@ Component({
       })
     },
     deleteNote(){
-      console.log('hello world')
       this.setData({
         isShowModal:true
       })
@@ -58,7 +56,6 @@ Component({
     addNote(){
       if(wx.getStorageSync('token')){
         CustomPromise.all([CustomRequest('POST','/note/upload',{})]).then((res:any)=>{
-          console.log(res[0].data)
           wx.navigateTo({
             url:`../note/write?id=${res[0].data}`
           })
@@ -81,11 +78,9 @@ Component({
     },
     getNoteList(){
       CustomPromise.all([CustomRequest('GET',`/note/notebook/0`,{})]).then((res:any)=>{
-        console.log(res)
         this.setData({
           noteList:res[0].data.reverse()
         })
-        console.log(noteList)
       },(err:any)=>{
         console.log(err)
       })

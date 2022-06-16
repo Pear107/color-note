@@ -44,15 +44,7 @@
     flex-flow: column nowrap;
     row-gap: 20rpx;
     width: 506rpx;
-    margin-bottom: 100rpx;
-    input{
-      background: var(--input-bg-color-gray);
-      height: 60rpx;
-      border-radius: 30rpx;
-      line-height: 60rpx;
-      padding:0rpx 30rpx;
-      box-sizing: border-box;
-    }
+    margin-bottom: 80rpx;
   }
 
   &__btn {
