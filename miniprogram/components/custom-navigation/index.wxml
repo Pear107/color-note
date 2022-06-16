@@ -1,0 +1,9 @@
+<!--components/custom-natvigation/index.wxml-->
+<view class="c-navigation" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;background: {{bgColor}};">
+  <view class="c-navigation__back" bindtap="back" wx:if="{{showBack}}" style="height:{{CustomBar - StatusBar}}px;line-height: {{CustomBar - StatusBar}}px;" data-backText="{{backText}}">
+  </view>
+  <view class="c-navigation__title" style="line-height: {{CustomBar - StatusBar}}px;">
+    {{titleText}}
+  </view>
+  <view class="u-title__other"></view>
+</view>

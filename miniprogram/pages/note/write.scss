@@ -1,0 +1,124 @@
+/* pages/note/write.wxss */
+.container {
+  position: relative;
+  background: linear-gradient(180deg, #ffd3a5, #fd6585);
+  overflow: hidden;
+}
+
+.c-write {
+  display: grid;
+  grid-template-rows: 1fr 1.5fr 16fr 1.5fr;
+  grid-template-areas: 'head''secondHead'
+    'editor'
+    'operate';
+  width: 702rpx;
+  height: 80vh;
+  padding: 30rpx;
+  box-sizing: border-box;
+  background: var(--bg-color-white);
+  overflow: hidden;
+
+  &__head {
+    grid-area: head;
+    display: flex;
+    position: relative;
+
+    .u-title {
+      font-size: 36rpx;
+    }
+
+    .u-icon {
+      position: absolute;
+      right: 0px;
+      width: 48rpx;
+      height: 48rpx;
+      --test:url(https://newgym.cn/color-note/save.png);
+      background: url(https://newgym.cn/color-note/save.png) no-repeat center/cover;
+    }
+  }
+
+  &__secondHead {
+    grid-area: secondHead;
+    display: flex;
+    align-items: center;
+    column-gap: 10rpx;
+
+    .u-time,
+    .u-variety {
+      font-size: 18rpx;
+      line-height: 24rpx;
+    }
+
+    .u-variety {
+      padding: 6rpx 10rpx;
+      border-radius: 18rpx;
+      background: #ee795933;
+      color: var(--color);
+    }
+  }
+
+  &__editor {
+    grid-area: editor;
+    height: 100%;
+  }
+
+  &__operate {
+    grid-area: operate;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+
+    .u-icon {
+      width: 48rpx;
+      height: 48rpx;
+    }
+    .u-icon:nth-child(1){
+      background: url(https://newgym.cn/color-note/public.png) no-repeat center/cover;
+    }
+    .u-icon:nth-child(2){
+      background: url(https://newgym.cn/color-note/analyse.png) no-repeat center/cover;    
+    }
+    .u-icon:nth-child(3){
+      background: url(https://newgym.cn/color-note/image.png) no-repeat center/cover;    
+    }
+  }
+}
+
+.c-variety {
+  position: absolute;
+  left: 320rpx;
+  top: 240rpx;
+  width: 320rpx;
+  max-height: 400rpx;
+  overflow: scroll;
+  padding: 0rpx 10rpx;
+  &__item {
+    height: 80rpx;
+    padding: 10rpx;
+    box-sizing: border-box;
+    text-align: center;
+    background: #f1f2f6;
+    color: var(--color);
+  }
+
+  &__item+&__item {
+    border-top: 1px solid #b2bec344;
+  }
+
+  &__item:nth-child(1) {
+    border-top-left-radius: 16rpx;
+    border-top-right-radius: 16rpx;
+  }
+  &__item:nth-last-child(2){
+    color:var(--tab-bar-text);
+  }
+  &__item:nth-last-child(1) {
+    border-bottom-left-radius: 16rpx;
+    border-bottom-right-radius: 16rpx;
+    color: var(--base-color);
+  }
+}
+#canvas{
+  position: absolute;
+  top: 100vh;
+}

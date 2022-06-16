@@ -1,0 +1,37 @@
+.c-colorPicker{
+  display: flex;
+  justify-content: space-between;
+  &__item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 20rpx;
+  }
+  &__item.active{
+    &::before{
+      content: "";
+      display: block;
+      width: 20rpx;
+      height: 20rpx;
+      border-radius: 10rpx;
+      background: var(--bg-color-white);
+    }
+  }
+  &__item:nth-child(1){
+    background:var(--variety-color-yellow);
+  }
+  &__item:nth-child(2){
+    background: var(--variety-color-purple);
+  }
+  &__item:nth-child(3){
+    background: var(--variety-color-green);
+  }
+  &__item:nth-child(4){
+    background: var(--variety-color-red);
+  }
+  &__item:nth-child(5){
+    background: var(--variety-color-lightGreen);
+  }
+}

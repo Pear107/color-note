@@ -1,0 +1,131 @@
+/* pages/note/index.wxss */
+@import '../../app.scss';
+
+.container {
+  background:linear-gradient(135deg,#feac5e,#c779d0,#4bc0c8);
+  background-blend-mode: screen;
+}
+
+.c-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .c-search__ipt {
+    width: 702rpx;
+    height: 60rpx;
+    padding-left: 30rpx;
+    border-radius: 30rpx;
+    box-sizing: border-box;
+    background: var(--input-bg-color);
+    font-size: 22rpx;
+    color: var(--base-color);
+  }
+
+  .c-search__ipt::-webkit-input-placeholder {
+    color: var(--base-color-light);
+  }
+
+  .c-search__ipt::-moz-placeholder {
+    color: var(--base-color-light);
+  }
+
+  .c-search__ipt:-ms-input-placeholder {
+    color: var(--base-color-light);
+  }
+
+  .c-search__ipt::-webkit-input-placeholder {
+    color: var(--base-color-light);
+  }
+
+  .c-search__ipt::placeholder {
+    color: var(--base-color-light);
+  }
+
+  .c-search__btn {
+    position: absolute;
+    right: 30rpx;
+    width: 32rpx;
+    height: 32rpx;
+    background: url(https://newgym.cn/color-note/search.png) no-repeat center/cover;
+  }
+}
+
+.c-noteList {
+  display: flex;
+  flex-flow: column;
+  row-gap: 10rpx;
+  margin: 20rpx 0rpx;
+  box-sizing: border-box;
+  width: 702rpx;
+  height: 100%;
+  overflow: hidden scroll;
+
+  &__item {
+    height: 160rpx;
+    background: var(--bg-color-white-alpah8);
+    display: grid;
+    grid-template-columns: 2fr 5fr 3fr;
+    grid-template-rows: 1.5fr 1fr;
+    grid-template-areas: 'icon title time'
+      'icon content content';
+
+    .u-icon {
+      grid-area: icon;
+      place-self: center;
+      width: 100rpx;
+      height: 100rpx;
+      // background-color: #ff6b81;
+      background: url(https://newgym.cn/color-note/file.png) no-repeat center/cover;
+    }
+
+    .u-title {
+      grid-area: title;
+      align-self: center;
+      font-size: 32rpx;
+      color: #ffa502;
+    }
+
+    .u-text {
+      grid-area: content;
+      align-self: flex-start;
+      font-size: 24rpx;
+      color: #a4b0be;
+     
+    }
+
+    .u-time {
+      grid-area: time;
+      align-self: center;
+      justify-self: flex-end;
+      padding-right: 30rpx;
+      box-sizing: border-box;
+      font-size: 28rpx;
+      color: #2980b9;
+    }
+  }
+}
+
+.c-addBtn {
+  position: fixed;
+  right: 50rpx;
+  bottom: 150rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100rpx;
+  height: 100rpx;
+  background: var(--bg-color-white);
+  border-radius: 50%;
+
+  &__item {
+    position: absolute;
+    width: 70rpx;
+    height: 16rpx;
+    background: var(--base-color);
+  }
+
+  &__item:nth-child(2) {
+    transform: rotate(90deg);
+  }
+}

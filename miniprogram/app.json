@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/note/write",
+    "pages/variety/noteList",
+    "pages/variety/view",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationStyle": "custom"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "plugins": {
+    "chatbot": {
+      "version": "1.2.43",
+      "provider": "wx8c631f7e9f2465e1"
+    }
+  }
+}

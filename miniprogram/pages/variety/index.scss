@@ -1,0 +1,72 @@
+/* pages/variety/index.wxss */
+@import '../../app.scss';
+.container{
+  background:linear-gradient(135deg,#3494e6,#ec6ead);
+}
+.c-variety{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  column-gap: 10%;
+  row-gap: 20px;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  box-sizing: border-box;
+  overflow: scroll;
+  // color: #f9d3e3;
+  color: var(--text-color-white);
+  &__community,&__star,&__item,&__add{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    place-items: center;
+    position: relative;
+    width: 45%;
+    height: 200rpx;
+    padding: 0 3%;
+    box-sizing: border-box;
+    .u-icon{
+      width: 100rpx;
+      height: 100rpx;
+    }
+    .u-name{
+      font-size: 32rpx;
+      text-align: center;
+    }
+  }
+  &__add{
+    margin-bottom: 20rpx;
+  }
+  &__community{
+    width: 100% !important;
+    height: 300rpx !important;
+    background:var(--variety-color-pink);
+    .u-name{
+      font-size: 64rpx !important;
+    }
+    .u-icon{
+      width: 200rpx;
+      height: 200rpx;
+      background: url(https://newgym.cn/color-note/community.png)no-repeat center/cover;
+    }
+  }
+  // &__star{
+  //   background: #a76283;
+  //   .u-icon{
+  //     background: url(https://newgym.cn/color-note/star.png) no-repeat center/cover;
+  //   }
+  // }
+  &__item{
+    background: var(--bgColor);
+    .u-icon{
+      background: url(https://newgym.cn/color-note/book.png) no-repeat center/cover;
+    }
+  }
+  &__add{
+    background: var(--variety-color-gray);
+    color:var(--text-color-white);
+    .u-icon{
+      background: url(https://newgym.cn/color-note/add.png) no-repeat center/cover;
+    }
+  }
+}

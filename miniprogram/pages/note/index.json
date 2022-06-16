@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "CustomNavigation":"../../components/custom-navigation/index",
+    "CustomModal":"../../components/custom-modal/index",
+    "CustomToast":"../../components/custom-toast/index"
+  }
+}

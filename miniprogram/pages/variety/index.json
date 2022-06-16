@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "CustomNavigation":"../../components/custom-navigation/index",
+    "CustomModal":"../../components/custom-modal/index"
+  }
+}

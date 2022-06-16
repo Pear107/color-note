@@ -1,0 +1,13 @@
+<!--pages/variety/noteList.wxml-->
+<view class="container" style="--bgColor:{{bgColor}};">
+  <CustomNavigation showBack="{{true}}" backText="返回" titleText="{{name}}">
+  </CustomNavigation>
+  <view class="c-noteList">
+    <view class="c-noteList__item f-border-radius" wx:for="{{noteList}}" wx:key="index" bindtap="enterNote">
+      <image class="u-img {{noteList[index].img!==''?'':'noImg'}}" src="{{noteList[index].img}}" mode="aspectFill"></image>
+      <view class="u-text {{noteList[index].img!==''?'':'noImg'}}">{{noteList[index].text}}</view>
+      <view class="u-name">by {{noteList[index].name}}</view>
+      <view class="u-like" data-num="6"></view>
+    </view>
+  </view>
+</view>

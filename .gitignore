@@ -1,0 +1,22 @@
+# Windows
+[Dd]esktop.ini
+Thumbs.db
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+
+# Node.js
+node_modules/
+typings/
+package-lock.json
+package.json
+project.config.json
+project.private.config.json
+tsconfig.json
+README.md
+.eslintrc.js

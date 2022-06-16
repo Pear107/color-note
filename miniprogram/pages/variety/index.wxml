@@ -1,0 +1,28 @@
+<!--pages/variety/index.wxml-->
+<view class="container">
+  <CustomNavigation></CustomNavigation>
+  <view class="c-variety">
+    <view class="c-variety__community f-border-radius" bindtap="enterVariety" data-color="#b68ed4">
+      <view class="u-name">社区</view>
+      <view class="u-icon"></view>
+    </view>
+    <view class="c-variety__item f-border-radius" wx:for="{{varieties}}" wx:key="index" style="--bgColor:{{item.Color}}" data-name="{{item.NoteBookName}}" data-color="{{item.Color}}" data-id="{{item.NoteBookId}}" catchtap="enterVariety" catchlongpress="editVariety">
+      <view class="u-icon"></view>
+      <view class="u-name">{{item.NoteBookName}}</view>
+    </view>
+    <view class="c-variety__add f-border-radius" catchtap="addVariety">
+      <veiw class="u-icon"></veiw>
+      <veiw class="u-name">添加</veiw>
+    </view>
+  </view>
+  <CustomModal wx:if="{{showModal}}" caption="{{modalStatus===0?'新建分类':'编辑分类'}}" customContent="{{true}}" bind:parentConfirm="confirm" bind:parentCancel="cancel">
+    <input class="u-input" placeholder="分类名" maxlength="8" model:value="{{newVarietyName}}" />
+    <view class="c-colorPicker">
+      <view class="c-colorPicker__item {{colorIndex===0?'active':''}}" bindtap="setColor" data-index="0" data-color="#f5d227"></view>
+      <view class="c-colorPicker__item {{colorIndex===1?'active':''}}" bindtap="setColor" data-index="1" data-color="#b99192"></view>
+      <view class="c-colorPicker__item {{colorIndex===2?'active':''}}" bindtap="setColor" data-index="2" data-color="#b5c07b"></view>
+      <view class="c-colorPicker__item {{colorIndex===3?'active':''}}" bindtap="setColor" data-index="3" data-color="#dd8270"></view>
+      <view class="c-colorPicker__item {{colorIndex===4?'active':''}}" bindtap="setColor" data-index="4" data-color="#bccdbb"></view>
+    </view>
+  </CustomModal>
+</view>

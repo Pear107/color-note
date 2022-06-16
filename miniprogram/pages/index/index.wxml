@@ -1,0 +1,28 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="c-page">
+    <view class="c-page__item" hidden="{{tabIndex!==0}}">
+      <Variety id="variety"></Variety>
+    </view>
+    <view class="c-page__item" hidden="{{tabIndex!==1}}">
+      <Note id="note"></Note>
+    </view>
+    <view class="c-page__item" hidden="{{tabIndex!==2}}">
+      <Mine id="mine"></Mine>
+    </view>
+  </view>
+  <view class="c-tabBar f-box-shadow">
+    <view class="c-tabBar__item {{tabIndex===0?'active':''}}" bindtap="toVariety">
+      <view class="u-icon"></view>
+      <view class="u-text">{{list[0].text}}</view>
+    </view>
+    <view class="c-tabBar__item {{tabIndex===1?'active':''}}" bindtap="toNote">
+      <view class="u-icon"></view>
+      <view class="u-text">{{list[1].text}}</view>
+    </view>
+    <view class="c-tabBar__item {{tabIndex===2?'active':''}}" bindtap="toMine">
+      <view class="u-icon"></view>
+      <view class="u-text">{{list[2].text}}</view>
+    </view>
+  </view>
+</view>

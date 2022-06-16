@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "Variety":"../variety/index",
+    "Note":"../note/index",
+    "Mine":"../mine/index"
+  }
+}

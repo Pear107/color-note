@@ -1,0 +1,24 @@
+/* components/custom-toast/index.wxss */
+@import '../../assets/scss/color.scss';
+.c-toast {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  row-gap: 10rpx;
+  position: absolute;
+  top: calc(50vh - 200rpx);
+  left: calc(50vw - 100rpx);
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 16rpx;
+  background:var(--bg-color-black);
+  &__icon{
+    width: 80rpx;
+    height: 80rpx;
+    background: var(--icon) no-repeat center/cover;
+  }
+  &__text{
+    color:var(--text-color-white);
+  }
+}

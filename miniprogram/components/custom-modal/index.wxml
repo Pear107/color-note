@@ -1,0 +1,14 @@
+<!--components/custom-modal/index.wxml-->
+<view class="c-cover"></view>
+<view class="c-modal" style="--height: {{height}};">
+  <view class="c-modal__cover"></view>
+  <view class="c-modal__caption">{{caption}}</view>
+  <view class="c-modal__content" wx:if="{{!customContent}}">{{content}}</view>
+  <view class="c-modal__customContent" wx:if="{{customContent}}">
+    <slot></slot>
+  </view>
+  <view class="c-modal__btn">
+    <view class="u-btn u-confirm" bindtap="confirm">确认</view>
+    <view class="u-btn u-cancel" bindtap="cancel">取消</view>
+  </view>
+</view>

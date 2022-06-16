@@ -1,0 +1,30 @@
+/* components/custom-list/index.wxss */
+@import '../../app.scss';
+.c-list{
+  position: relative;
+  width: 702rpx;
+  height: auto;
+  background: var(--bg-color-white);
+  &__item{
+    height: 80rpx;
+    display: flex;
+    column-gap: 10rpx;
+    align-items: center;
+    padding-left: 20rpx;
+    box-sizing: border-box;
+    .u-icon{
+      width: 26rpx;
+      height: 26rpx;
+    }
+    .u-text{
+      font-size: 26rpx;
+      line-height: 80rpx;
+      color: var(--font-color-white);
+    }
+  }
+  &__item + &__item{
+    border-width: 2rpx 0rpx 0rpx 0rpx;
+    border-color: var(--border-color-whitesmoke);
+    border-style: solid;
+  }
+}
