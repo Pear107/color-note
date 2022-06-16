@@ -43,9 +43,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    enterNote(){
+    enterNote(e:any){
+      let id=e.currentTarget.dataset.id
       wx.navigateTo({
-        url:'../note/write'
+        url:`../note/write?id=${id}`
       })
     },
     deleteNote(){
@@ -57,9 +58,9 @@ Component({
     addNote(){
       if(wx.getStorageSync('token')){
         CustomPromise.all([CustomRequest('POST','/note/upload',{})]).then((res:any)=>{
-          console.log(res)
+          console.log(res[0].data)
           wx.navigateTo({
-            url:'../note/write'
+            url:`../note/write?id=${res[0].data}`
           })
         },(err:any)=>{
           console.log(err)
@@ -82,7 +83,7 @@ Component({
       CustomPromise.all([CustomRequest('GET',`/note/notebook/0`,{})]).then((res:any)=>{
         console.log(res)
         this.setData({
-          noteList:res[0].data
+          noteList:res[0].data.reverse()
         })
         console.log(noteList)
       },(err:any)=>{

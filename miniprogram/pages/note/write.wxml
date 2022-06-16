@@ -3,7 +3,7 @@
   <CustomNavigation showBack="{{true}}" backText="返回"></CustomNavigation>
   <view class="c-write f-border-radius">
     <view class="c-write__head">
-      <input class="u-title" placeholder="标题" maxlength="8" />
+      <input class="u-title" placeholder="标题" maxlength="8" model:value="{{title}}" />
       <view class="u-icon" catchtap="save"></view>
     </view>
     <view class="c-write__secondHead">

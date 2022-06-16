@@ -9,7 +9,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    tabIndex:0,
+    tabIndex:1,
     child:['#variety','#note','#mine'],
     list: [{
       iconPath: "https://newgym.cn/color-note/variety.png",

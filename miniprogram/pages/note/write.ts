@@ -18,6 +18,8 @@ Component({
     variety:'未分类',
     color:'',
     datetime: '',
+    id:'',
+    title:'',
     isShowVariety: false,
     isShowToast: false                                                
   },
@@ -58,8 +60,11 @@ Component({
     }
   },
   methods: {
-    onLoad(){
-      console.log('hello wrold')
+    onLoad(options:any){
+      this.setData({
+        id:options.id
+      })
+      this.getNote()
     },
     insertImage() {
       wx.chooseImage({
@@ -141,7 +146,7 @@ Component({
         delta: delta,
         success: (res: any) => {
           console.log(res)
-        },
+        }, 
         fail: (err: any) => {
           console.log(err)
         },
@@ -208,6 +213,19 @@ Component({
         isShowToast:false
       })
     },
+    getNote(){
+      const that=this
+      CustomPromise.all([CustomRequest('GET',`/note/${this.data.id}`,{})]).then((res:any)=>{
+        console.log(res[0])
+        that.setContents(res[0].delta)
+        that.setData({
+          title:res[0].info.NoteName
+        })
+
+      },(err:any)=>{
+
+      })
+    },
     save() {
       const that = this
       new CustomPromise((resolve: Function, reject: Function) => {
@@ -230,15 +248,22 @@ Component({
           resolve(res)
         })
       }).then((value: any) => {
-        console.log(value.delta.ops)
-        let delta = {
-          title: that.data.title || '未命名',
-          contents: value.delta.ops,
-          editTime: this.data.editTime
-        }
-        return CustomRequest('PUT', '/note/update/delta/16', { delta })
+        console.log(value.delta)
+        let delta =value.delta.ops
+        console.log(typeof delta)
+        console.log(delta.toString())
+        return CustomRequest('PUT', `/note/update/delta/${that.data.id}`, { 
+          "delta":value.delta
+         })
       }, (error: any) => {
         console.log(error)
+      }).then((res:any)=>{
+        console.log(res)
+        return CustomRequest('PUT',`/note/update/name/${that.data.id}`,{
+          "new_notename":that.data.title
+        })
+      },(err:any)=>{
+
       }).then((value: any) => {
         console.log(value)
         wx.showToast({

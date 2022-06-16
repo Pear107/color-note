@@ -40,6 +40,7 @@ function CustomRequest(method: METHOD, url: string, data: any) {
 }
 
 function formatData(data: any) {
+  console.log(data)
   let ret: string = ''
   for (let key in data) {
     ret += `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}&`

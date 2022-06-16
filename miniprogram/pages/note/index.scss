@@ -53,7 +53,7 @@
 
 .c-noteList {
   display: flex;
-  flex-flow: column;
+  flex-flow: column nowrap;
   row-gap: 10rpx;
   margin: 20rpx 0rpx;
   box-sizing: border-box;
