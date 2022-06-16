@@ -9,37 +9,7 @@ Component({
     bgColor:'',
     name:'',
     id:'',
-    noteList:[
-      // {
-      //   img:'https://newgym.cn/color-note/docker.png',
-      //   text:'testtesttet',
-      //   name:'刀妹'
-      // },
-      // {
-      //   img:'https://newgym.cn/color-note/docker.png',
-      //   text:'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
-      //   name:'刀妹'
-      // },
-      // {
-      //   img:'https://newgym.cn/color-note/docker.png',
-      //   text:'testtesttesttesttesttesttesttesttest',
-      //   name:'刀妹'
-      // },
-      // {
-      //   img:'https://newgym.cn/color-note/docker.png',
-      //   text:'testtesttesttesttesttesttesttesttest',
-      //   name:'刀妹刀妹刀妹刀妹刀妹刀妹'
-      // },
-      // {
-      //   img:'https://newgym.cn/color-note/tushe.png',
-      //   text:'testtesttesttesttesttesttesttesttest',
-      //   name:'刀妹'
-      // },{
-      //   img:'',
-      //   text:'https://newgym.cn/color-note/docker.pnghttps://newgym.cn/color-note/docker.png',
-      //   name:'刀妹'
-      // }
-    ]
+    noteList:[]
   },
   methods:{
     onLoad(options:any){
@@ -53,7 +23,10 @@ Component({
     getNoteList(){
       const that=this
       CustomPromise.all([CustomRequest('GET',`/note/notebook/${that.data.id}`,{})]).then((res:any)=>{
-        console.log(res)
+        console.log(res[0].data)
+        that.setData({
+          noteList:res[0].data
+        })
       },(err:any)=>{
 
       })

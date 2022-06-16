@@ -16,15 +16,20 @@
     float: right;
   }
   &__item {
-    display: grid;
-    grid-template-rows: auto auto 70rpx;
-    grid-template-columns: 3fr 1fr;
     column-gap: 20rpx;
     grid-template-areas: 'img img' 'text text' 'name love';
     position: relative;
     width: 48%;
+    height: 300rpx;
     margin-bottom: 3%;
     background: #f5f3f2;
+
+    .u-title{
+      height: 260rpx;
+      font-size: 36rpx;
+      text-align: center;
+      line-height: 260rpx;
+    }
 
     .u-img {
       grid-area: img;
@@ -87,5 +92,22 @@
       line-height: 70rpx;
       color: var(--base-color);
     }
+  }
+}
+
+.c-empty{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 10rpx;
+  position: absolute;
+  top: calc(50vh - 128rpx);
+  &__img{
+    width: 256rpx;
+    height: 256rpx;
+    background: url(https://newgym.cn/color-note/empty.png) no-repeat center/cover;
+  }
+  &__text{
+    color: var(--text-color-white);
   }
 }

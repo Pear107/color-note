@@ -4,10 +4,15 @@
   </CustomNavigation>
   <view class="c-noteList">
     <view class="c-noteList__item f-border-radius" wx:for="{{noteList}}" wx:key="index" bindtap="enterNote">
-      <image class="u-img {{noteList[index].img!==''?'':'noImg'}}" src="{{noteList[index].img}}" mode="aspectFill"></image>
-      <view class="u-text {{noteList[index].img!==''?'':'noImg'}}">{{noteList[index].text}}</view>
-      <view class="u-name">by {{noteList[index].name}}</view>
-      <view class="u-like" data-num="6"></view>
+      <view class="u-title">{{item.NoteName}}</view>
+      <image wx:if="{{false}}" class="u-img {{noteList[index].img!==''?'':'noImg'}}" src="{{noteList[index].img}}" mode="aspectFill"></image>
+      <view wx:if="{{false}}" class="u-text {{noteList[index].img!==''?'':'noImg'}}">{{noteList[index].text}}</view>
+      <!-- <view wx:if="{{name==='社区'}}" class="u-name">by {{noteList[index].name}}</view> -->
+      <view wx:if="{{name==='社区'}}" class="u-like" data-num="6"></view>
     </view>
+  </view>
+  <view class="c-empty" wx:if="{{noteList.length===0}}">
+    <view class="c-empty__img"></view>
+    <view class="c-empty__text">空空如也</view>
   </view>
 </view>
