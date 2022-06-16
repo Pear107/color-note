@@ -1,6 +1,8 @@
 <!--pages/note/index.wxml-->
 <wxs module="format">
   function formatTime(dt) {
+    dt=dt.replace('+08:00','')
+    dt=dt.replace('T',' ')
     var currDate=getDate()
     var noteDate=getDate(dt)
     var monthes=[31,28,31,30,31,30,31,31,30,31,30,31]
