@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "CustomNavigation":"../../components/custom-navigation/index",
-    "CustomToast":"../../components/custom-toast/index"
+    "CustomNavigation":"../../components/custom-navigation/index"
   }
 }

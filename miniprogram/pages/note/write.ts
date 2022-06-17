@@ -23,8 +23,7 @@ Component({
     id:'',
     oldTitle:'',
     title:'',
-    isShowVariety: false,
-    isShowToast: false                                                
+    isShowVariety: false                                         
   },
   lifetimes: {
     attached() {
@@ -203,21 +202,6 @@ Component({
         variety:e.currentTarget.dataset.name,
         color:e.currentTarget.dataset.color,
         varietyId:e.currentTarget.dataset.id
-      })
-    },
-    showToast(){
-      this.setData({
-        isShowToast:true
-      })
-      setTimeout(()=>{
-        this.setData({
-          isShowToast:false
-        })
-      },1000)
-    },
-    hiddenToast(){
-      this.setData({
-        isShowToast:false
       })
     },
     getNote(){

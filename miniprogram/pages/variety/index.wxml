@@ -2,11 +2,11 @@
 <view class="container">
   <CustomNavigation></CustomNavigation>
   <view class="c-variety">
-    <view class="c-variety__community f-border-radius" bindtap="enterVariety" data-name="社区" data-color="#b68ed4">
+    <view class="c-variety__community f-border-radius" bindtap="enterVariety" data-name="社区" data-color="#b68ed4" data-isCommunity="1">
       <view class="u-name">社区</view>
       <view class="u-icon"></view>
     </view>
-    <view class="c-variety__item f-border-radius" wx:for="{{varieties}}" wx:key="index" style="--bgColor:{{item.Color}}" data-name="{{item.NoteBookName}}" data-color="{{item.Color}}" data-id="{{item.NoteBookId}}" catchtap="enterVariety" catchlongpress="editVariety">
+    <view class="c-variety__item f-border-radius" wx:for="{{varieties}}" wx:key="index" style="--bgColor:{{item.Color}}" data-name="{{item.NoteBookName}}" data-color="{{item.Color}}" data-id="{{item.NoteBookId}}" data-isCommunity="" catchtap="enterVariety" catchlongpress="editVariety">
       <view class="u-icon"></view>
       <view class="u-name">{{item.NoteBookName}}</view>
     </view>

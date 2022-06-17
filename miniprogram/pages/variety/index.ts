@@ -106,18 +106,16 @@ Component({
       })
     },
     enterVariety(e: any) {
+      console.log(e.currentTarget.dataset)
       if (wx.getStorageSync('token')) {
         let c: color = e.currentTarget.dataset.color
         let id:string=e.currentTarget.dataset.id
         let n:string=e.currentTarget.dataset.name
-        console.log(c)
+        let i:string=e.currentTarget.dataset.iscommunity
         wx.navigateTo({
-          url: `../variety/noteList?bgColor=${c}&id=${id}&name=${n}`
+          url: `../variety/noteList?bgColor=${c}&id=${id}&name=${n}&isCommunity=${i}`
         })
       } else {
-        wx.showToast({
-          title: '是吧'
-        })
       }
     },
     editVariety(e: any) {

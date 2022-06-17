@@ -22,23 +22,17 @@ App<IAppOption>({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-    // 获取 token 
-    wx.getStorage({
-      key:'token',
-      success:()=>{
-        if(wx.getStorageSync('nickName')&&wx.getStorageSync('avatarUrl')){
-          this.globalData.nickName=wx.getStorageSync('nickName')
-          this.globalData.avatarUrl=wx.getStorageSync('avatarUrl')
-          this.globalData.token=wx.getStorageSync('token')
-          this.globalData.openid=wx.getStorageSync('openid')
-        }else{
-          wx.clearStorage()
-        }
-      },
-      fail:()=>{
-        wx.clearStorage()
-      }
-    })
+    // 获取本地存储信息
+    let token=wx.getStorageSync('token')
+    let openid=wx.getStorageSync('openid')
+    let nickName=wx.getStorageSync('nickName')
+    let avatarUrl=wx.getStorageSync('avatarUrl')
+    if(token&&openid&&nickName&&avatarUrl){
+      this.globalData.nickName=nickName
+      this.globalData.avatarUrl=avatarUrl
+    }else{
+      wx.clearStorageSync()
+    }
 
     // 获取系统信息
     wx.getSystemInfo({

@@ -12,8 +12,7 @@ Component({
     CustomBar:app.globalData.CustomBar,
     noteList:[
     ],
-    isShowModal:false,
-    isShowToast:false
+    isShowModal:false
   },
 
   /**
@@ -85,28 +84,12 @@ Component({
         console.log(err)
       })
     },
-    showToast(){
-      this.setData({
-        isShowToast:true
-      })
-      setTimeout(()=>{
-        this.setData({
-          isShowToast:false
-        })
-      },1000)
-    },
-    hiddenToast(){
-      this.setData({
-        isShowToast:false
-      })
-    },
     onShow(){
       console.log('onShow')
     },
     onHidden(){
       console.log('onHidden')
       this.cancel()
-      this.hiddenToast()
     }
   }
 })

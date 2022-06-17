@@ -1,5 +1,0 @@
-<!--components/custom-toast/index.wxml-->
-<view class="c-toast">
-  <view class="c-toast__icon" style="--icon:url({{icons[icon]}})"></view>
-  <view class="c-toast__text">{{status}}</view>
-</view>
