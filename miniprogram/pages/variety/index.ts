@@ -17,7 +17,7 @@ Component({
     newVarietyName: '',
     oldVarietyName: '',
     modalStatus: 0,
-    colorArray: ["#c88f23", "#b99192", "#b5c07b", "#dd8270", "#bccdbb"]
+    colorArray: ["#b68ed4","#f6416c","#b99192","#b5c07b","#dd8270","#ff9b6a"]
   },
 
   /**

@@ -43,8 +43,11 @@ Component({
   methods: {
     enterNote(e:any){
       let id=e.currentTarget.dataset.id
+      let name=e.currentTarget.dataset.name
+      let time=e.currentTarget.dataset.time
+      let bookid=e.currentTarget.dataset.NoteBookId
       wx.navigateTo({
-        url:`../note/write?id=${id}`
+        url:`../note/write?id=${id}&name=${name}&bookid=${bookid}&time=${time}`
       })
     },
     deleteNote(){

@@ -51,10 +51,20 @@ Component({
         })
       }
     },
-    enterNote(){
-      wx.navigateTo({
-        url:'./view'
-      })
+    enterNote(e:any){
+      let id=e.currentTarget.dataset.id
+      let name=e.currentTarget.dataset.name
+      let time=e.currentTarget.dataset.time
+      if(this.data.isCommunity){
+        wx.navigateTo({
+          url:`./view?id=${id}&name=${name}&time=${time}`
+        })
+      }else{
+        let bookid=e.currentTarget.dataset.bookid
+        wx.navigateTo({
+          url:`../note/write?id=${id}&name=${name}&bookid=${bookid}&time=${time}`
+        })
+      }
     }
   }
 })

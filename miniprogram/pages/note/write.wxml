@@ -8,7 +8,7 @@
     </view>
     <view class="c-write__secondHead">
       <view class="u-time">{{datetime}}</view>
-      <view class="u-variety" catchtap="selectVarieties" style="--color:{{color?color:''}}">{{variety}}</view>
+      <view class="u-variety" catchtap="selectVarieties" style="--bgColor:{{bgColor}}">{{variety}}</view>
     </view>
     <editor id="editor" class="c-write__editor" placeholder="打算记点什么" show-img-size="true" bindstatuschange="onStatusChange" bindready="onEditorReady" bindinput="onEditorInput" bindtap="hiddenVarieties" read-only="{{false}}"></editor>
     <view class="c-write__operate">
@@ -19,7 +19,7 @@
   </view>
   <view class="c-variety f-border-radius-big" wx:if="{{isShowVariety}}">
     <view class="c-variety__item" wx:for="{{varieties}}" wx:key="index" style="--color:{{item.Color}}"  data-name="{{item.NoteBookName}}" data-id="{{item.NoteBookId}}" data-color="{{item.Color}}" bindtap="selectVariety">{{item.NoteBookName}}</view>
-    <view class="c-variety__item" data-name="未分类" data-color="" bindtap="selectVariety">未分类</view>
+    <view class="c-variety__item" data-id="0" data-name="未分类" data-color="#353535" bindtap="selectVariety">未分类</view>
     <view class="c-variety__item">添加分类</view>
   </view>
   <canvas id="canvas" type="2d"></canvas>

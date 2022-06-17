@@ -1,6 +1,6 @@
 /* pages/variety/noteList.wxss */
 .container{
-  background: var(--bgColor);
+  background: linear-gradient(135deg,#feac5e,#c779d0,#4bc0c8);
 }
 .c-noteList {
   width: 100%;
@@ -16,17 +16,25 @@
     float: right;
   }
   &__item {
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    row-gap: 10rpx;
     position: relative;
     width: 48%;
-    height: 300rpx;
     margin-bottom: 3%;
-    background: #f5f3f2;
-
+    padding: 10rpx 0;
+    background:var(--bgColor);
+    color: var(--text-color-white);
+    box-shadow: 0rpx 10rpx 15rpx -3rpx rgba(0,0,0,0.1);
+    .u-img{
+      width: 240rpx;
+      height: 240rpx;
+      background: url(https://newgym.cn/color-note/page.png) no-repeat center/cover;
+    }
     .u-name{
-      height: 260rpx;
       font-size: 36rpx;
       text-align: center;
-      line-height: 260rpx;
     }
     .test{
       display: flex;

@@ -15,59 +15,57 @@ Component({
   data: {
     CustomBar: app.globalData.CustomBar,
     varieties: [],
-    variety:'未分类',
-    oldVarietyId:0,
-    varietyId:0,
-    color:'',
+    variety: '未分类',
+    oldVarietyId: 0,
+    varietyId: 0,
+    bgColor: '#353535',
     datetime: '',
-    id:'',
-    oldTitle:'',
-    title:'',
-    isShowVariety: false                                         
+    id: '',
+    oldTitle: '',
+    title: '',
+    isShowVariety: false
   },
   lifetimes: {
     attached() {
       this.setData({
-        varieties:app.globalData.varieties
+        varieties: app.globalData.varieties
       })
-      plugin.init({
-        appid: "TWBy1YUYKJTgRLmVdWre06IutAQY6c",
-        openid: wx.getStorageSync('openid'), // 小程序的openid，必填项
-        autoRecommendGuideList: true,
-        success: () => { },
-        fail: (error: any) => {
-          console.log(error)
-        },
-        guideList: ["您好"],
-        textToSpeech: true, //默认为ture打开状态
-        background: "rgba(247,251,252,1)",
-        guideCardHeight: 40,
-        operateCardHeight: 145,
-        history: true,
-        navHeight: 0,
-        robotHeader: "",
-        userHeader: "",
-        userName: "",
-        anonymous: false, // 是否允许匿名用户登录，版本1.2.9后生效, 默认为false，设为ture时，未传递userName、userHeader两个字段时将弹出登录框
-        hideMovableButton: false,
-      });
     }
   },
   pageLifetimes: {
     show() {
-      console.log(wx.getStorageSync('token'))
-      this.setData({
-        datetime: formatTime(new Date())
-      })
       wx.createSelectorQuery().select('#editor').context(function (res) {
         editorCtx = res.context as EditorContext
       }).exec()
     }
   },
   methods: {
-    onLoad(options:any){
+    onLoad(options: any) {
       this.setData({
-        id:options.id
+        id: options.id,
+        title: options.name||"",
+        oldTitle: options.name||"",
+        varietyId: options.bookid||0,
+        oldVarietyId: options.bookid||0
+      })
+      if(options.time){
+        this.setData({
+          datetime:formatTime(new Date(options.time))
+        })
+      }else{
+        this.setData({
+          datetime:formatTime(new Date())
+        })
+      }
+      console.log(this.data.varieties)
+      console.log(options)
+      this.data.varieties.forEach((item: any) => {
+        if (item.NoteBookId === options.bookid*1) {
+          this.setData({
+            bgColor: item.Color,
+            variety: item.NoteBookName
+          })
+        }
       })
       this.getNote()
     },
@@ -151,7 +149,7 @@ Component({
         delta: delta,
         success: (res: any) => {
           console.log(res)
-        }, 
+        },
         fail: (err: any) => {
           console.log(err)
         },
@@ -159,31 +157,6 @@ Component({
       console.log('hello world')
       this.getContents((res: any) => {
         console.log(res)
-      })
-    },
-
-    /**
-     * 语义分析
-     */
-    async analyse() {
-      let txt: string = ''
-      this.getContents((res: any) => {
-        console.log(res.delta)
-        res.delta.ops.forEach((item: any) => {
-          if (typeof item.insert == "string" && item.insert.trim() != '') {
-            if (txt == '') {
-              txt = item.insert
-            } else {
-              txt = txt + '，' + item.insert
-            }
-          }
-        });
-        plugin.api.nlp("tokenize", { q: txt }).then((res: any) => {
-          console.log(txt)
-          console.log("tokenize result : ", res);
-        }, (err: any) => {
-          console.log(err)
-        });
       })
     },
     selectVarieties() {
@@ -196,32 +169,20 @@ Component({
         isShowVariety: false
       })
     },
-    selectVariety(e:any){
+    selectVariety(e: any) {
       console.log(e.currentTarget.dataset)
       this.setData({
-        variety:e.currentTarget.dataset.name,
-        color:e.currentTarget.dataset.color,
-        varietyId:e.currentTarget.dataset.id
+        variety: e.currentTarget.dataset.name,
+        bgColor: e.currentTarget.dataset.color,
+        varietyId: e.currentTarget.dataset.id
       })
     },
-    getNote(){
-      const that=this
-      CustomPromise.all([CustomRequest('GET',`/note/${this.data.id}`,{})]).then((res:any)=>{
+    getNote() {
+      const that = this
+      CustomPromise.all([CustomRequest('GET', `/note/${this.data.id}`, {})]).then((res: any) => {
+        console.log(res[0])
         that.setContents(JSON.parse(res[0].delta))
-        that.setData({
-          title:res[0].info.NoteName,
-          oldTitle:res[0].info.NoteName,
-          varietyId:res[0].info.NoteBookId,
-          oldVarietyId:res[0].info.NoteBookId
-        })
-        that.data.varieties.forEach((item:any)=>{
-          if(item.NoteBookId===that.data.varietyId){
-            that.setData({
-              color:item.Color
-            })
-          }
-        })
-      },(err:any)=>{
+      }, (err: any) => {
         console.log(err)
       })
     },
@@ -248,40 +209,40 @@ Component({
         })
       }).then((value: any) => {
         console.log(JSON.stringify(value.delta))
-        let delta =JSON.stringify(value.delta)
+        let delta = JSON.stringify(value.delta)
         console.log(JSON.stringify(value.delta))
-        return CustomRequest('PUT', `/note/update/delta/${that.data.id}`, { 
+        return CustomRequest('PUT', `/note/update/delta/${that.data.id}`, {
           delta
-         })
+        })
       }, (error: any) => {
         console.log(error)
-      }).then((res:any)=>{
+      }).then((res: any) => {
         console.log(res)
-        if(that.data.oldTitle!==that.data.title){
-          return CustomRequest('PUT',`/note/update/name/${that.data.id}`,{
-            "new_notename":that.data.title
+        if (that.data.oldTitle !== that.data.title) {
+          return CustomRequest('PUT', `/note/update/name/${that.data.id}`, {
+            "new_notename": that.data.title
           })
         }
         return 0;
-      },(err:any)=>{
+      }, (err: any) => {
         console.log(err)
-      }).then((res:any)=>{
+      }).then((res: any) => {
         console.log('noteBookId')
         console.log(that.data.varietyId)
         console.log(res)
-        if(that.data.oldVarietyId!==that.data.varietyId){
-          return CustomRequest('PUT',`/note/update/notebook/${that.data.id}`,{
-            "new_notebookid":that.data.varietyId
+        if (that.data.oldVarietyId !== that.data.varietyId) {
+          return CustomRequest('PUT', `/note/update/notebook/${that.data.id}`, {
+            "new_notebookid": that.data.varietyId
           })
         }
         return 0;
-      },(err:any)=>{
+      }, (err: any) => {
         console.log(err)
       }).then((res: any) => {
         console.log(res)
         wx.showToast({
           title: '上传成功',
-          icon: 'success', 
+          icon: 'success',
           duration: 500
         })
         setTimeout(() => {

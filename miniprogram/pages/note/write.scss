@@ -52,8 +52,8 @@
     .u-variety {
       padding: 6rpx 10rpx;
       border-radius: 18rpx;
-      background: #ee795933;
-      color: var(--color);
+      background: var(--bgColor);
+      color: var(--text-color-white);
     }
   }
 
@@ -76,7 +76,7 @@
       background: url(https://newgym.cn/color-note/public.png) no-repeat center/cover;
     }
     .u-icon:nth-child(2){
-      background: url(https://newgym.cn/color-note/analyse.png) no-repeat center/cover;    
+      background: url(https://newgym.cn/color-note/delete_purple.png) no-repeat center/cover;    
     }
     .u-icon:nth-child(3){
       background: url(https://newgym.cn/color-note/image.png) no-repeat center/cover;    

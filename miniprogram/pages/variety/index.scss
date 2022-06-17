@@ -1,9 +1,11 @@
 /* pages/variety/index.wxss */
 @import '../../app.scss';
-.container{
-  background:linear-gradient(135deg,#3494e6,#ec6ead);
+
+.container {
+  background: linear-gradient(135deg,#cc95c0,#dbd4b4,#7aa1d2);
 }
-.c-variety{
+
+.c-variety {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
@@ -16,56 +18,70 @@
   overflow: scroll;
   // color: #f9d3e3;
   color: var(--text-color-white);
-  &__community,&__star,&__item,&__add{
+
+  &__community,
+  &__star,
+  &__item,
+  &__add {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     place-items: center;
     position: relative;
     width: 45%;
     height: 200rpx;
     padding: 0 3%;
     box-sizing: border-box;
-    .u-icon{
+
+    .u-icon {
       width: 100rpx;
       height: 100rpx;
     }
-    .u-name{
+
+    .u-name {
       font-size: 32rpx;
       text-align: center;
     }
   }
-  &__add{
+
+  &__add {
     margin-bottom: 20rpx;
   }
-  &__community{
+
+  &__community {
     width: 100% !important;
     height: 300rpx !important;
-    background:var(--variety-color-pink);
-    .u-name{
+    background: var(--variety-color-purple-dark);
+
+    .u-name {
       font-size: 64rpx !important;
     }
-    .u-icon{
+
+    .u-icon {
       width: 200rpx;
       height: 200rpx;
       background: url(https://newgym.cn/color-note/community.png)no-repeat center/cover;
     }
   }
+
   // &__star{
   //   background: #a76283;
   //   .u-icon{
   //     background: url(https://newgym.cn/color-note/star.png) no-repeat center/cover;
   //   }
   // }
-  &__item{
+  &__item {
     background: var(--bgColor);
-    .u-icon{
+
+    .u-icon {
       background: url(https://newgym.cn/color-note/book.png) no-repeat center/cover;
     }
   }
-  &__add{
+
+  &__add {
     background: var(--variety-color-gray);
-    color:var(--text-color-white);
-    .u-icon{
+    color: var(--text-color-white);
+
+    .u-icon {
       background: url(https://newgym.cn/color-note/add.png) no-repeat center/cover;
     }
   }

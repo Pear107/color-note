@@ -2,11 +2,12 @@
 <wxs module="format" src="../../utils/util.wxs">
   
 </wxs>
-<view class="container" style="--bgColor:{{bgColor}};">
+<view class="container">
   <CustomNavigation showBack="{{true}}" backText="返回" titleText="{{name}}">
   </CustomNavigation>
   <view class="c-noteList">
-    <view class="c-noteList__item f-border-radius" wx:for="{{noteList}}" wx:key="index" bindtap="enterNote">
+    <view class="c-noteList__item f-border-radius-big f-box-shadow-big" wx:for="{{noteList}}" wx:key="index" bindtap="enterNote" style="--bgColor:{{bgColor}};" data-id="{{item.NoteId}}" data-name="{{item.NoteName}}" data-bookid="{{item.NoteBookId}}" data-time="{{item.LastUpdate}}">
+      <view class="u-img"></view>
       <view class="u-name">{{item.NoteName}}</view>
       <view class="test">
         <view class="u-time">{{format.formatTime(item.LastUpdate)}}</view>
