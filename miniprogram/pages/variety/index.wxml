@@ -15,10 +15,10 @@
       <veiw class="u-name">新建</veiw>
     </view>
   </view>
-  <CustomModal wx:if="{{showModal}}" caption="{{modalStatus===0?'新建笔记本':'编辑笔记本'}}" customContent="{{true}}" bind:parentConfirm="confirm" bind:parentCancel="cancel">
+  <CustomModal wx:if="{{isShowModal}}" caption="{{modalStatus===0?'新建笔记本':'编辑笔记本'}}" customContent="{{true}}" bind:parentConfirm="confirm" bind:parentCancel="cancel">
     <view class="c-edit">
       <input class="c-edit__input" placeholder="分类名" maxlength="8" model:value="{{newVarietyName}}" />
-      <view class="c-edit__delete f-border-radius" wx:if="{{modalStatus===1}}"></view>
+      <view class="c-edit__delete f-border-radius" wx:if="{{modalStatus===1}}" bindtap="showDelete"></view>
     </view>
     <view class="c-colorPicker">
       <view class="c-colorPicker__item {{colorIndex===0?'active':''}}" bindtap="setColor" data-index="0" data-color="#f5d227"></view>
@@ -29,4 +29,5 @@
     </view>
     <view class="u-delete"></view>
   </CustomModal>
+  <CustomModal wx:if="{{isShowDelete}}" caption="是否删除" bind:parentConfirm="confirm" bind:parentCancel="cancel"></CustomModal>
 </view>

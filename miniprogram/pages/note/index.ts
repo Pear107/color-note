@@ -65,7 +65,13 @@ Component({
 
       }
     },
-    confirm(){
+    confirm(e:any){
+      let id=e.currentTarget.dataset.id
+      CustomRequest('DELETE',`/note/delete/${id}`).then((res:any)=>{
+        console.log(res)
+      },(err:any)=>{
+
+      })
       this.setData({
         isShowModal:false
       })

@@ -4,7 +4,7 @@ type METHOD = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'TRACE' |
 
 const baseURL = 'https://newgym.cn/colorNote'
 
-function CustomRequest(method: METHOD, url: string, data: any) {
+function CustomRequest(method: METHOD, url: string, data?: any) {
   return new CustomPromise(function (resolve: Function, reject: Function) {
     const token = wx.getStorageSync('token')
     let header: { [key: string]: string } = {
@@ -13,12 +13,14 @@ function CustomRequest(method: METHOD, url: string, data: any) {
       // 'Authorization':token
     };
     console.log(baseURL+url)
-    data = formatData(data)
+    if(data){
+      data = formatData(data)
+    }
     wx.request({
       url: baseURL + url,
       method: method,
       // data: method === 'POST' ? JSON.stringify(data) : data,
-      data: data,
+      data: data||'',
       header: header,
       success(res: any) {
         //请求成功
