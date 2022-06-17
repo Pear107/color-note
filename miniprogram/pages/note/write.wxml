@@ -10,10 +10,10 @@
       <view class="u-time">{{datetime}}</view>
       <view class="u-variety" catchtap="selectVarieties" style="--bgColor:{{bgColor}}">{{variety}}</view>
     </view>
-    <editor id="editor" class="c-write__editor" placeholder="打算记点什么" show-img-size="true" bindstatuschange="onStatusChange" bindready="onEditorReady" bindinput="onEditorInput" bindtap="hiddenVarieties" read-only="{{false}}"></editor>
+    <editor id="editor" class="c-write__editor" placeholder="打算记点什么" show-img-size="true" bindstatuschange="onStatusChange" bindinput="onEditorInput" bindtap="hiddenVarieties" read-only="{{false}}"></editor>
     <view class="c-write__operate">
-      <view class="u-icon" bindtap="public"></view>
-      <view class="u-icon" bindtap="analyse"></view>
+      <view class="u-icon" bindtap="publish"></view>
+      <view class="u-icon" bindtap="delete"></view>
       <view class="u-icon" bindtap="insertImage"></view>
     </view>
   </view>
@@ -23,4 +23,5 @@
     <view class="c-variety__item">添加分类</view>
   </view>
   <canvas id="canvas" type="2d"></canvas>
+  <CustomModal caption="是否删除" wx:if="{{isShowModal}}" bind:parentConfirm="confirm" bind:parentCancel="cancel"></CustomModal>
 </view>

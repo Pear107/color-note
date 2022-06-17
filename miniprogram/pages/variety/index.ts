@@ -75,6 +75,17 @@ Component({
             console.log('setData')
           }, (err: any) => {
             console.log(err)
+            if(err.code===401){
+              wx.showToast({
+                title:'笔记本名称重复',
+                icon:'error'
+              })
+            }else{
+              wx.showToast({
+                title:'创建失败',
+                icon:'error'
+              })
+            }
             that.cancel()
           })
           return

@@ -4,11 +4,8 @@ import CustomPromise from '../../utils/customPromise';
 import CustomRequest from '../../utils/customRequest';
 interface EditorContext {
   [key: string]: any,
-  // insertImage:insertImage,
-  // scrollIntoView:scrollIntoView
 }
 let editorCtx: EditorContext = {}
-const plugin = requirePlugin("chatbot");
 
 const app = getApp()
 Component({
@@ -23,7 +20,9 @@ Component({
     id: '',
     oldTitle: '',
     title: '',
-    isShowVariety: false
+    isShowVariety: false,
+    isShowModal: false,
+    isSave: true
   },
   lifetimes: {
     attached() {
@@ -43,24 +42,24 @@ Component({
     onLoad(options: any) {
       this.setData({
         id: options.id,
-        title: options.name||"",
-        oldTitle: options.name||"",
-        varietyId: options.bookid||0,
-        oldVarietyId: options.bookid||0
+        title: options.name || "",
+        oldTitle: options.name || "",
+        varietyId: options.bookid || 0,
+        oldVarietyId: options.bookid || 0
       })
-      if(options.time){
+      if (options.time) {
         this.setData({
-          datetime:formatTime(new Date(options.time))
+          datetime: formatTime(new Date(options.time))
         })
-      }else{
+      } else {
         this.setData({
-          datetime:formatTime(new Date())
+          datetime: formatTime(new Date())
         })
       }
       console.log(this.data.varieties)
       console.log(options)
       this.data.varieties.forEach((item: any) => {
-        if (item.NoteBookId === options.bookid*1) {
+        if (item.NoteBookId === options.bookid * 1) {
           this.setData({
             bgColor: item.Color,
             variety: item.NoteBookName
@@ -118,17 +117,9 @@ Component({
      * @param e event 对象
      */
     onEditorInput(e: any) {
-      if (e.detail.delta.ops[0].insert.image === undefined && e.detail.delta.ops[0].insert.trim() === '') {
-        this.setData({
-          empty: true,
-          isSave: true
-        })
-      } else {
-        this.setData({
-          empty: false,
-          isSave: false
-        })
-      }
+      this.setData({
+        isSave: false
+      })
     },
 
     /**
@@ -241,29 +232,93 @@ Component({
       }).then((res: any) => {
         console.log(res)
         wx.showToast({
-          title: '上传成功',
-          icon: 'success',
-          duration: 500
+          title: '保存成功',
+          icon: 'success'
         })
-        setTimeout(() => {
-          wx.navigateBack({
-
-          })
-        }, 500)
         that.setData({
           isSave: true
         })
       }, (error: any) => {
         console.log(error)
         wx.showToast({
-          title: '上传失败',
-          icon: 'error',
-          duration: 500
+          title: '保存失败',
+          icon: 'error'
         })
         that.setData({
           isSave: false
         })
       })
+    },
+    delete() {
+      console.log('delete')
+      this.setData({
+        isShowModal: true
+      })
+    },
+    confirm() {
+      let id = this.data.id
+      CustomRequest('DELETE', `/note/delete/${id}`).then((res: any) => {
+        console.log(res)
+        wx.showToast({
+          title: '删除成功',
+          icon: 'success'
+        })
+        wx.navigateBack({
+
+        })
+      }, (err: any) => {
+        console.log(err)
+        wx.showToast({
+          title: '删除失败',
+          icon: 'error'
+        })
+      })
+      this.setData({
+        isShowModal: false
+      })
+    },
+    cancel() {
+      this.setData({
+        isShowModal: false
+      })
+    },
+    publish() {
+      if (!this.data.isSave) {
+        wx.showToast({
+          title: '请先保存',
+          icon: 'error'
+        })
+      } else {
+        const that = this
+        new CustomPromise((resolve: Function, reject: Function) => {
+          that.getContents((res: any) => {
+            if(res.text.length<50){
+              wx.showToast({
+                title:'字数过少',
+                icon:'error'
+              })
+              reject()
+            }else{
+              resolve()
+            }
+          })
+        }).then((res: any) => {
+          console.log(res)
+          let id = this.data.id
+          return CustomRequest('POST', `/note/release/${id}`)
+        }, (err: any) => {
+          console.log(err)
+        }).then((res: any) => {
+          if (res.code === 200) {
+            wx.showToast({
+              title: '发布成功',
+              icon: 'success'
+            })
+          }
+        }, (err: any) => {
+          console.log(err)
+        })
+      }
     }
   }
 })

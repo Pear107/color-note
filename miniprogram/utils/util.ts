@@ -1,5 +1,4 @@
 export const formatTime = (date: Date) => {
-  console.log(date)
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -17,4 +16,15 @@ export const formatTime = (date: Date) => {
 const formatNumber = (n: number) => {
   const s = n.toString()
   return s[1] ? s : '0' + s
+}
+
+export function timeToNumber(date:Date){
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+  let num=([year, month, day,hour,minute,second].map(formatNumber).join('') as any) as number
+  return num
 }

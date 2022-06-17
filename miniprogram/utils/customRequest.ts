@@ -29,7 +29,7 @@ function CustomRequest(method: METHOD, url: string, data?: any) {
         if (res.data.code === 200) {
           resolve(res.data)
         } else {
-          reject(res.data.msg)
+          reject(res.data)
         }
       },
       fail(err) {

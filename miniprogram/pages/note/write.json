@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "CustomNavigation":"../../components/custom-navigation/index"
+    "CustomNavigation":"../../components/custom-navigation/index",
+    "CustomModal":"../../components/custom-modal/index"
   }
 }

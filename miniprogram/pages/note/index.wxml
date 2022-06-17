@@ -8,7 +8,7 @@
     <view class="c-search__btn"></view>
   </view>
   <view class="c-noteList">
-    <view class="c-noteList__item f-box-shadow f-border-radius" wx:for="{{noteList}}" wx:key="index" bindtap="enterNote" data-id="{{item.NoteId}}" data-name="{{item.NoteName}}" data-bookid="{{item.NoteBookId}}" data-time="{{item.LastUpdate}}" capture-bind:longpress="deleteNote">
+    <view class="c-noteList__item f-box-shadow f-border-radius" wx:for="{{noteList}}" wx:key="index" bindtap="enterNote" data-id="{{item.NoteId}}" data-name="{{item.NoteName}}" data-bookid="{{item.NoteBookId}}" data-time="{{item.LastUpdate}}">
       <view class="u-icon"></view>
       <view class="u-title f-ellipsis">{{item.NoteName}}</view>
       <view class="u-text f-ellipsis">{{item.content}}</view>
@@ -19,5 +19,4 @@
     <view class="c-addBtn__item f-border-radius"></view>
     <view class="c-addBtn__item f-border-radius"></view>
   </view>
-  <CustomModal caption="是否删除" wx:if="{{isShowModal}}" bind:parentConfirm="confirm" bind:parentCancel="cancel"></CustomModal>
 </view>
