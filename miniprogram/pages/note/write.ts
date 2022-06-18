@@ -21,7 +21,7 @@ Component({
     isShowVariety: false,
     isShowModal: false,
     isSave: true,
-    editorCtx:{}
+    editorCtx: {}
   },
   lifetimes: {
     attached() {
@@ -56,7 +56,7 @@ Component({
           })
         }
       })
-      const that=this
+      const that = this
       wx.createSelectorQuery().select('#editor').context(function (res) {
         editorCtx = res.context as EditorContext
         that.getNote()
@@ -110,7 +110,7 @@ Component({
      * 编辑器输入
      * @param e event 对象
      */
-    onEditorInput(e: any) {
+    onEditorInput() {
       this.setData({
         isSave: false
       })
@@ -144,8 +144,8 @@ Component({
         console.log(res)
       })
     },
-    getNote(){
-      CustomPromise.all([CustomRequest('GET', `/note/${this.data.id}`, {})]).then((res: any) => { 
+    getNote() {
+      CustomPromise.all([CustomRequest('GET', `/note/${this.data.id}`, {})]).then((res: any) => {
         editorCtx.setContents({
           html: res[0].delta,
           success: (res: any) => {
@@ -178,76 +178,78 @@ Component({
       })
     },
     save() {
-      const that = this
-      new CustomPromise((resolve: Function, reject: Function) => {
-        that.getContents((res: any) => {
-          let l = res.delta.ops.length;
-          let i = 0;
-          while (i < l) {
-            if (typeof res.delta.ops[i].insert == "object") {
+      if (this.data.isSave) {
+        wx.showToast({
+          title: '已保存',
+          icon: 'error'
+        })
+      } else {
+        const that = this
+        new CustomPromise((resolve: Function, reject: Function) => {
+          that.getContents((res: any) => {
+            for (const match of res.html.matchAll(/http:\/\/tmp\/[a-zA-Z0-9]+\.png/g)) {
+              console.log(match)
               wx.uploadFile({
-                filePath: res.delta.ops[i].insert.image,
+                filePath: match,
                 name: "image",
                 url: 'https://newgym.cn/note/img/upload',
-                success: (ress:any) => {
+                success: (ress: any) => {
                   console.log(ress)
-                  console.log(i)
-                  console.log(res.delta.ops[0])
                 }
               })
             }
-            i++
+            res.html = res.html.replace(/http:\/\/tmp/g, 'https://newgym.cn/note/img/show')
+            resolve(res)
+          })
+        }).then((value: any) => {
+          let delta = value.html
+          return CustomRequest('PUT', `/note/update/delta/${that.data.id}`, {
+            delta
+          })
+        }, (error: any) => {
+          console.log(error)
+        }).then((res: any) => {
+          console.log(res)
+          if (that.data.oldTitle !== that.data.title) {
+            return CustomRequest('PUT', `/note/update/name/${that.data.id}`, {
+              "new_notename": that.data.title
+            })
           }
-          resolve(res)
-        })
-      }).then((value: any) => {
-        let delta = value.html
-        return CustomRequest('PUT', `/note/update/delta/${that.data.id}`, {
-          delta
-        })
-      }, (error: any) => {
-        console.log(error)
-      }).then((res: any) => {
-        console.log(res)
-        if (that.data.oldTitle !== that.data.title) {
-          return CustomRequest('PUT', `/note/update/name/${that.data.id}`, {
-            "new_notename": that.data.title
+          return 0;
+        }, (err: any) => {
+          console.log(err)
+        }).then((res: any) => {
+          console.log('noteBookId')
+          console.log(that.data.varietyId)
+          console.log(res)
+          if (that.data.oldVarietyId !== that.data.varietyId) {
+            return CustomRequest('PUT', `/note/update/notebook/${that.data.id}`, {
+              "new_notebookid": that.data.varietyId
+            })
+          }
+          return 0;
+        }, (err: any) => {
+          console.log(err)
+        }).then((res: any) => {
+          console.log(res)
+          wx.showToast({
+            title: '保存成功',
+            icon: 'success'
           })
-        }
-        return 0;
-      }, (err: any) => {
-        console.log(err)
-      }).then((res: any) => {
-        console.log('noteBookId')
-        console.log(that.data.varietyId)
-        console.log(res)
-        if (that.data.oldVarietyId !== that.data.varietyId) {
-          return CustomRequest('PUT', `/note/update/notebook/${that.data.id}`, {
-            "new_notebookid": that.data.varietyId
+          that.setData({
+            isSave: true
           })
-        }
-        return 0;
-      }, (err: any) => {
-        console.log(err)
-      }).then((res: any) => {
-        console.log(res)
-        wx.showToast({
-          title: '保存成功',
-          icon: 'success'
+        }, (error: any) => {
+          console.log(error)
+          wx.showToast({
+            title: '保存失败',
+            icon: 'error'
+          })
+          that.setData({
+            isSave: false
+          })
         })
-        that.setData({
-          isSave: true
-        })
-      }, (error: any) => {
-        console.log(error)
-        wx.showToast({
-          title: '保存失败',
-          icon: 'error'
-        })
-        that.setData({
-          isSave: false
-        })
-      })
+      }
     },
     delete() {
       console.log('delete')
