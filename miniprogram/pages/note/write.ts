@@ -189,8 +189,10 @@ Component({
                 filePath: res.delta.ops[i].insert.image,
                 name: "image",
                 url: 'https://newgym.cn/note/img/upload',
-                success: (res) => {
-                  console.log(res)
+                success: (ress:any) => {
+                  console.log(ress)
+                  console.log(i)
+                  console.log(res.delta.ops[0])
                 }
               })
             }
