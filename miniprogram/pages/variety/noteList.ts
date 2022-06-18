@@ -33,11 +33,21 @@ Component({
         icon:'loading'
       })
       if(that.data.isCommunity){
-        that.setData({
-          isLoading:false
+        CustomPromise.all([CustomRequest('GET',`/note/community`)]).then((res:any)=>{
+          wx.hideToast({})
+          that.setData({
+            noteList:res[0].data,
+            isLoading:false
+          })
+        },(err:any)=>{
+          console.log(err)
+          wx.hideToast({})
+          that.setData({
+            isLoading:false
+          })
         })
       }else{
-        CustomPromise.all([CustomRequest('GET',`/note/notebook/${that.data.id}`,{})]).then((res:any)=>{
+        CustomPromise.all([CustomRequest('GET',`/note/notebook/${that.data.id}`)]).then((res:any)=>{
           console.log(res[0].data)
           wx.hideToast({})
           that.setData({
@@ -45,6 +55,8 @@ Component({
             isLoading:false
           })
         },(err:any)=>{
+          console.log(err)
+          wx.hideToast({})
           this.setData({
             isLoading:false
           })

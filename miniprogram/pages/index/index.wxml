@@ -8,7 +8,7 @@
       <Note id="note"></Note>
     </view>
     <view class="c-page__item" hidden="{{tabIndex!==2}}">
-      <Mine id="mine"></Mine>
+      <Mine id="mine" bind:ready="onReady"></Mine>
     </view>
   </view>
   <view class="c-tabBar f-box-shadow">

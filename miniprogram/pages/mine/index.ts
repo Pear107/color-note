@@ -127,6 +127,9 @@ Component({
           nickName: wx.getStorageSync('nickName'),
           avatarUrl: wx.getStorageSync('avatarUrl')
         })
+        var myEventDetail = {} // detail对象，提供给事件监听函数
+        var myEventOption = {} // 触发事件的选项
+        that.triggerEvent('ready',myEventDetail,myEventOption)
       }, (err: any) => {
         wx.clearStorageSync()
         console.log(err)

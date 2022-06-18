@@ -180,6 +180,9 @@ Component({
     onHidden() {
       console.log('onHidden')
       this.cancel()
+    },
+    onReady(){
+      this.getVarieties()
     }
   }
 })

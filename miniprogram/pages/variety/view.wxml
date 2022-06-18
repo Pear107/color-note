@@ -3,16 +3,16 @@
   <CustomNavigation showBack="{{true}}" backText="返回"></CustomNavigation>
   <view class="c-write f-border-radius">
     <view class="c-write__head">
-      <input class="u-title" placeholder="标题" maxlength="8" />
+      <view class="u-title">{{title}}</view>
     </view>
     <view class="c-write__secondHead">
       <view class="u-time">{{datetime}}</view>
     </view>
     <editor id="editor" class="c-write__editor" placeholder="打算记点什么" show-img-size="true" bindstatuschange="onStatusChange" bindready="onEditorReady" bindinput="onEditorInput" bindtap="hiddenVariety" read-only="{{true}}"></editor>
     <view class="c-write__operate">
-      <view class="u-icon" bindtap="overt"></view>
-      <view class="u-icon" bindtap="nlp"></view>
-      <view class="u-icon" bindtap="insertImage"></view>
+      <view class="u-icon" bindtap="agree"></view>
+      <view class="u-icon" bindtap="like"></view>
+      <!-- <view class="u-icon" bindtap="tipOff"></view> -->
     </view>
   </view>
   <view class="c-variety f-border-radius-big" wx:if="{{showVariety}}">

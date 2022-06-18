@@ -53,6 +53,10 @@ Component({
         tabIndex:2
       })
       this.selectComponent('#mine').onShow()
+    },
+    onReady(){
+      this.selectComponent('#note').onReady()
+      this.selectComponent('#variety').onReady()
     }
   }
 })

@@ -10,7 +10,7 @@
       <view class="u-time">{{datetime}}</view>
       <view class="u-variety" catchtap="selectVarieties" style="--bgColor:{{bgColor}}">{{variety}}</view>
     </view>
-    <editor id="editor" class="c-write__editor" placeholder="打算记点什么" show-img-size="true" bindstatuschange="onStatusChange" bindinput="onEditorInput" bindtap="hiddenVarieties" read-only="{{false}}"></editor>
+    <editor id="editor" class="c-write__editor" placeholder="打算记点什么" show-img-size="true" bindstatuschange="onStatusChange" bindready="onEditorReady" bindinput="onEditorInput" bindtap="hiddenVarieties" read-only="{{false}}"></editor>
     <view class="c-write__operate">
       <view class="u-icon" bindtap="publish"></view>
       <view class="u-icon" bindtap="delete"></view>

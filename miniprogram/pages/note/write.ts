@@ -2,9 +2,7 @@
 import { formatTime } from '../../utils/util';
 import CustomPromise from '../../utils/customPromise';
 import CustomRequest from '../../utils/customRequest';
-interface EditorContext {
-  [key: string]: any,
-}
+
 let editorCtx: EditorContext = {}
 
 const app = getApp()
@@ -199,9 +197,7 @@ Component({
           resolve(res)
         })
       }).then((value: any) => {
-        console.log(JSON.stringify(value.delta))
         let delta = JSON.stringify(value.delta)
-        console.log(JSON.stringify(value.delta))
         return CustomRequest('PUT', `/note/update/delta/${that.data.id}`, {
           delta
         })

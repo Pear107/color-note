@@ -86,6 +86,9 @@ Component({
     },
     onHidden(){
       console.log('onHidden')
+    },
+    onReady(){
+      this.getNoteList()
     }
   }
 })

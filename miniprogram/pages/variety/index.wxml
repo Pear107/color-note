@@ -2,7 +2,7 @@
 <view class="container">
   <CustomNavigation></CustomNavigation>
   <view class="c-variety">
-    <view class="c-variety__community f-border-radius f-box-shadow-big" bindtap="enterVariety" data-name="社区" data-color="#b68ed4" data-isCommunity="1">
+    <view class="c-variety__community f-border-radius f-box-shadow-big" bindtap="enterVariety" data-name="社区" data-color="#aa5b71" data-isCommunity="1">
       <view class="u-name">社区</view>
       <view class="u-icon"></view>
     </view>

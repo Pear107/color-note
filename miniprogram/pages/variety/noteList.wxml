@@ -11,7 +11,7 @@
       <view class="u-name">{{item.NoteName}}</view>
       <view class="test">
         <view class="u-time">{{format.formatTime(item.LastUpdate)}}</view>
-        <view wx:if="{{isCommunity}}" class="u-like" data-num="6"></view>
+        <!-- <view wx:if="{{isCommunity}}" class="u-like" data-num="6"></view> -->
       </view>
     </view>
   </view>

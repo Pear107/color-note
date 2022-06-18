@@ -29,7 +29,6 @@
       right: 0px;
       width: 48rpx;
       height: 48rpx;
-      background: #ee7959;
     }
   }
 
@@ -67,7 +66,15 @@
     .u-icon {
       width: 48rpx;
       height: 48rpx;
-      background: #ee7959;
+    }
+    .u-icon:nth-child(1){
+      background: url(https://newgym.cn/color-note/agree.png) no-repeat center/cover;
+    }
+    .u-icon:nth-child(2){
+      background: url(https://newgym.cn/color-note/like.png) no-repeat center/cover;
+    }
+    .u-icon:nth-child(3){
+      background: url(https://newgym.cn/color-note/tip_off.png) no-repeat center/cover;
     }
   }
 }
