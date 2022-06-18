@@ -63,18 +63,28 @@
     justify-content: space-around;
     align-items: flex-end;
 
-    .u-icon {
-      width: 48rpx;
-      height: 48rpx;
+    .c-operate-item{
+      display: flex;
+      align-items: center;
+      column-gap: 10rpx;
+      .u-icon {
+        width: 48rpx;
+        height: 48rpx;
+      }
+      .u-text{
+        font-size: 36rpx;
+        color: var(--base-color);
+      }
     }
-    .u-icon:nth-child(1){
-      background: url(https://newgym.cn/color-note/agree.png) no-repeat center/cover;
+    .c-operate-item:nth-child(1){
+      .u-icon{
+        background: url(https://newgym.cn/color-note/agree.png) no-repeat center/cover;
+      }
     }
-    .u-icon:nth-child(2){
-      background: url(https://newgym.cn/color-note/like.png) no-repeat center/cover;
-    }
-    .u-icon:nth-child(3){
-      background: url(https://newgym.cn/color-note/tip_off.png) no-repeat center/cover;
+    .c-operate-item:nth-child(2){
+      .u-icon{
+        background: url(https://newgym.cn/color-note/like.png) no-repeat center/cover;
+      }
     }
   }
 }

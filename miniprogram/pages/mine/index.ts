@@ -42,8 +42,6 @@ Component({
   lifetimes: {
     attached() {
       console.log('attached')
-      this.getLike()
-      this.getAgree()
       this.setData({
         nickName: app.globalData.nickName,
         avatarUrl: app.globalData.avatarUrl

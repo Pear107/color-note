@@ -20,20 +20,14 @@ Component({
     title: '',
     isShowVariety: false,
     isShowModal: false,
-    isSave: true
+    isSave: true,
+    editorCtx:{}
   },
   lifetimes: {
     attached() {
       this.setData({
         varieties: app.globalData.varieties
       })
-    }
-  },
-  pageLifetimes: {
-    show() {
-      wx.createSelectorQuery().select('#editor').context(function (res) {
-        editorCtx = res.context as EditorContext
-      }).exec()
     }
   },
   methods: {
@@ -54,8 +48,6 @@ Component({
           datetime: formatTime(new Date())
         })
       }
-      console.log(this.data.varieties)
-      console.log(options)
       this.data.varieties.forEach((item: any) => {
         if (item.NoteBookId === options.bookid * 1) {
           this.setData({
@@ -64,7 +56,11 @@ Component({
           })
         }
       })
-      this.getNote()
+      const that=this
+      wx.createSelectorQuery().select('#editor').context(function (res) {
+        editorCtx = res.context as EditorContext
+        that.getNote()
+      }).exec()
     },
     insertImage() {
       wx.chooseImage({
@@ -148,6 +144,21 @@ Component({
         console.log(res)
       })
     },
+    getNote(){
+      CustomPromise.all([CustomRequest('GET', `/note/${this.data.id}`, {})]).then((res: any) => { 
+        editorCtx.setContents({
+          html: res[0].delta,
+          success: (res: any) => {
+            console.log(res)
+          },
+          fail: (err: any) => {
+            console.log(err)
+          },
+        })
+      }, (err: any) => {
+        console.log(err)
+      })
+    },
     selectVarieties() {
       this.setData({
         isShowVariety: true
@@ -164,15 +175,6 @@ Component({
         variety: e.currentTarget.dataset.name,
         bgColor: e.currentTarget.dataset.color,
         varietyId: e.currentTarget.dataset.id
-      })
-    },
-    getNote() {
-      const that = this
-      CustomPromise.all([CustomRequest('GET', `/note/${this.data.id}`, {})]).then((res: any) => {
-        console.log(res[0])
-        that.setContents(JSON.parse(res[0].delta))
-      }, (err: any) => {
-        console.log(err)
       })
     },
     save() {
@@ -197,7 +199,7 @@ Component({
           resolve(res)
         })
       }).then((value: any) => {
-        let delta = JSON.stringify(value.delta)
+        let delta = value.html
         return CustomRequest('PUT', `/note/update/delta/${that.data.id}`, {
           delta
         })
@@ -288,13 +290,13 @@ Component({
         const that = this
         new CustomPromise((resolve: Function, reject: Function) => {
           that.getContents((res: any) => {
-            if(res.text.length<50){
+            if (res.text.length < 50) {
               wx.showToast({
-                title:'字数过少',
-                icon:'error'
+                title: '字数过少',
+                icon: 'error'
               })
               reject()
-            }else{
+            } else {
               resolve()
             }
           })

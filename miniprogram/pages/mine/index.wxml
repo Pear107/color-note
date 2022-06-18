@@ -4,11 +4,11 @@
     <view class="c-head__image" style="background-image: url({{avatarUrl}});" bindtap="login"></view>
     <view class="c-head__text">{{nickName}}</view>
   </view>
-  <view class="c-board">
+  <!-- <view class="c-board">
     <view class="c-board__item" wx:for="{{boardData}}" wx:key="index">
       <view class="u-key">{{boardData[index].key}}</view>
       <view class="u-value">{{boardData[index].value}}</view>
     </view>
-  </view>
+  </view> -->
   <CustomList listData="{{listData}}"></CustomList>
 </view>

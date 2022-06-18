@@ -4,6 +4,8 @@
     "pages/note/write",
     "pages/variety/noteList",
     "pages/variety/view",
+    "pages/mine/feedback",
+    "pages/mine/about",
     "pages/logs/logs"
   ],
   "window": {

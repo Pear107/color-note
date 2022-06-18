@@ -25,6 +25,9 @@
 
     .u-title {
       font-size: 36rpx;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     .u-icon {

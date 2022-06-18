@@ -12,7 +12,9 @@ Component({
   data: {
     CustomBar:app.globalData.CustomBar,
     noteList:[
-    ]
+    ],
+    searchNoteList:[],
+    search:''
   },
 
   /**
@@ -75,6 +77,16 @@ Component({
             }else{
               return 1
             }
+          }),
+          searchNoteList:res[0].data.sort((a:any,b:any)=>{
+            let at=new Date(a.LastUpdate)
+            let bt=new Date(b.LastUpdate)
+            console.log(timeToNumber(at)>timeToNumber(bt))
+            if(timeToNumber(at)>timeToNumber(bt)){
+              return -1
+            }else{
+              return 1
+            }
           })
         })
       },(err:any)=>{
@@ -89,6 +101,22 @@ Component({
     },
     onReady(){
       this.getNoteList()
+    },
+    onSearch(e:any){
+      console.log(e.detail.value)
+      if(e.detail.value.trim()!==''){
+        this.setData({
+          searchNoteList:this.data.noteList.filter((item:any)=>{
+            console.log(item.NoteName)
+            let t= e.detail.value.trim()
+            return item.NoteName.includes(t)
+          })
+        })
+      }else{
+        this.setData({
+          searchNoteList:this.data.noteList
+        })
+      }
     }
   }
 })

@@ -10,14 +10,14 @@
     </view>
     <editor id="editor" class="c-write__editor" placeholder="打算记点什么" show-img-size="true" bindstatuschange="onStatusChange" bindready="onEditorReady" bindinput="onEditorInput" bindtap="hiddenVariety" read-only="{{true}}"></editor>
     <view class="c-write__operate">
-      <view class="u-icon" bindtap="agree"></view>
-      <view class="u-icon" bindtap="like"></view>
-      <!-- <view class="u-icon" bindtap="tipOff"></view> -->
+      <view class="c-operate-item">
+        <view class="u-icon" bindtap="agree"></view>
+        <view class="u-text">{{agree}}</view>
+      </view>
+      <view class="c-operate-item">
+        <view class="u-icon" bindtap="like"></view>
+        <view class="u-text">{{like}}</view>
+      </view>
     </view>
   </view>
-  <view class="c-variety f-border-radius-big" wx:if="{{showVariety}}">
-      <view class="c-variety__item" wx:for="{{varieties}}" wx:key="index" style="--color:{{item.color}}">{{item.name}}</view>
-      <view class="c-variety__item">未分类</view>
-      <view class="c-variety__item">添加分类</view>
-    </view>
 </view>
