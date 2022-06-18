@@ -30,9 +30,13 @@ Component({
     ],
     listData: [
       {
-        text: '反馈问题'
+        text: '反馈问题',
+        url: '../mine/feedback'
       },
-      { text: '关于我们' }
+      {
+        text: '关于我们',
+        url: '../mine/about'
+      }
     ]
   },
 
@@ -52,11 +56,11 @@ Component({
   /**
    * 组件页面生命周期
    */
-  pageLifetimes:{
-    show(){
+  pageLifetimes: {
+    show() {
       console.log('show')
     },
-    hide(){
+    hide() {
       console.log('hidden')
     }
   },
@@ -127,7 +131,7 @@ Component({
         })
         var myEventDetail = {} // detail对象，提供给事件监听函数
         var myEventOption = {} // 触发事件的选项
-        that.triggerEvent('ready',myEventDetail,myEventOption)
+        that.triggerEvent('ready', myEventDetail, myEventOption)
       }, (err: any) => {
         wx.clearStorageSync()
         console.log(err)
@@ -151,10 +155,10 @@ Component({
         console.log(err)
       })
     },
-    onShow(){
+    onShow() {
       console.log('onShow')
     },
-    onHidden(){
+    onHidden() {
       console.log('onHidden')
     }
   }

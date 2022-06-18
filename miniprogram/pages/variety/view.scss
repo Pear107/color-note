@@ -5,7 +5,7 @@
 
 .c-write {
   display: grid;
-  grid-template-rows: 1fr 1.5fr 16fr 1.5fr;
+  grid-template-rows: 1fr 1fr 16fr 1fr;
   grid-template-areas: 'head''secondHead'
     'editor'
     'operate';
@@ -21,7 +21,7 @@
     position: relative;
 
     .u-title {
-      font-size: 36rpx;
+      font-size: 42rpx;
     }
 
     .u-icon {
@@ -38,17 +38,10 @@
     align-items: center;
     column-gap: 10rpx;
 
-    .u-time,
-    .u-variety {
-      font-size: 18rpx;
-      line-height: 24rpx;
-    }
-
-    .u-variety {
-      padding: 6rpx 10rpx;
-      border-radius: 18rpx;
-      background: #ee795933;
-      color: var(--tab-bar-text);
+    .u-time {
+      height: 36rpx;
+      line-height: 36rpx;
+      font-size: 24rpx;
     }
   }
 

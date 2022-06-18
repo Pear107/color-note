@@ -17,12 +17,11 @@
   width: 594rpx;
   min-height: 221rpx;
   box-sizing: border-box;
-  // background: #fefefe;
-  background:#beb1aa;
-  color: var(--text-color-white);
+  background:var(--bg-color-white);
   border-radius: 16rpx;
   padding-top: 32rpx;
   z-index: 3;
+  box-shadow: 0rpx 10rpx 15rpx -3rpx rgba(0,0,0,0.1);
   &__caption {
     margin-bottom: 22rpx;
   }
@@ -73,6 +72,10 @@
       background: var(--btn-bg-orange);
       color: var(--btn-text-color);
       border-bottom-right-radius: 16rpx;
+    }
+    .u-btn:only-child{
+      width: 100%;
+      border-radius: 0 0 16rpx 16rpx;
     }
   }
 }

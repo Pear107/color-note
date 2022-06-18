@@ -5,7 +5,8 @@
 <view class="container">
   <CustomNavigation showBack="{{true}}" backText="返回" titleText="{{name}}">
   </CustomNavigation>
-  <view class="c-noteList">
+  <view class="count">
+    <view class="c-noteList">
     <view class="c-noteList__item f-border-radius-big f-box-shadow-big" wx:for="{{noteList}}" wx:key="index" bindtap="enterNote" style="--bgColor:{{bgColor}};" data-id="{{item.NoteId}}" data-name="{{item.NoteName}}" data-bookid="{{item.NoteBookId}}" data-time="{{item.LastUpdate}}">
       <view class="u-img"></view>
       <view class="u-name">{{item.NoteName}}</view>
@@ -14,6 +15,7 @@
         <!-- <view wx:if="{{isCommunity}}" class="u-like" data-num="6"></view> -->
       </view>
     </view>
+  </view>
   </view>
   <view class="c-empty" wx:if="{{!isLoading&&noteList.length===0}}">
     <view class="c-empty__img"></view>

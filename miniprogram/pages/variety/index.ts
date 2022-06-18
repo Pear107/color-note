@@ -49,7 +49,10 @@ Component({
           isShowModal: true
         })
       } else {
-
+        wx.showToast({
+          title:'未登录',
+          icon:'error'
+        })
       }
     },
     setColor(e: any) {
@@ -137,6 +140,10 @@ Component({
           url: `../variety/noteList?bgColor=${c}&id=${id}&name=${n}&isCommunity=${i}`
         })
       } else {
+        wx.showToast({
+          title:'未登录',
+          icon:'error'
+        })
       }
     },
     editVariety(e: any) {

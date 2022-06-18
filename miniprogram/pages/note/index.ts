@@ -62,7 +62,10 @@ Component({
           console.log(err)
         })
       }else{
-
+        wx.showToast({
+          title:'未登录',
+          icon:'error'
+        })
       }
     },
     getNoteList(){

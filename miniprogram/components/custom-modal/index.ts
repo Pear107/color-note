@@ -19,6 +19,10 @@ Component({
     customContent:{
       type:Boolean,
       value:false
+    },
+    showCancel:{
+      type:Boolean,
+      value:true
     }
   },
 

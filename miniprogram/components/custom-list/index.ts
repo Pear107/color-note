@@ -26,6 +26,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    navigate(e:any){
+      let u=e.currentTarget.dataset.url
+      wx.navigateTo({
+        url:u
+      })
+    }
   }
 })

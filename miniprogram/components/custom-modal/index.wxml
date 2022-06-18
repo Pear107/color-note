@@ -9,6 +9,6 @@
   </view>
   <view class="c-modal__btn">
     <view class="u-btn u-confirm" bindtap="confirm">确认</view>
-    <view class="u-btn u-cancel" bindtap="cancel">取消</view>
+    <view wx:if="{{showCancel}}" class="u-btn u-cancel" bindtap="cancel">取消</view>
   </view>
 </view>

@@ -1,7 +1,7 @@
 <!--components/custom-list/index.wxml-->
 <view class="c-list f-border-radius" style="top: {{top+'rpx'}};">
-  <view class="c-list__item" wx:for="{{listData}}" wx:key="indexx">
-    <view class="u-icon" style="background: {{listData[index].icon}};"></view>
-    <view class="u-text">{{listData[index].text}}</view>
+  <view class="c-list__item" wx:for="{{listData}}" wx:key="index" bindtap="navigate" data-url="{{item.url}}">
+    <view class="u-icon" style="background: {{item.icon}};"></view>
+    <view class="u-text">{{item.text}}</view>
   </view>
 </view>

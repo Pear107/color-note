@@ -1,2 +1,7 @@
 <!--pages/mine/feedback.wxml-->
-<text>pages/mine/feedback.wxml</text>
+<view class="container">
+  <CustomNavigation showBack="{{true}}" backText="返回"></CustomNavigation>
+  <textarea class="u-ipt f-border-radius f-box-shadow-big" placeholder="请输入你的反馈" bindinput="input"></textarea>
+  <view class="u-btn f-border-radius f-box-shadow-big" bindtap="submit">提交</view>
+  <CustomModal wx:if="{{isShowModal}}" caption="提示" content="至少输入15字捏" showCancel="{{false}}" bind:parentConfirm="confirm"></CustomModal>
+</view>

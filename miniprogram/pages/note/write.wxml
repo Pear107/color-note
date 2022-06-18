@@ -1,7 +1,7 @@
 <!--pages/note/write.wxml-->
 <view class="container" bindtap="hiddenVarieties">
   <CustomNavigation showBack="{{true}}" backText="返回"></CustomNavigation>
-  <view class="c-write f-border-radius">
+  <view class="c-write f-border-radius f-box-shadow-big">
     <view class="c-write__head">
       <input class="u-title" placeholder="标题" maxlength="25" model:value="{{title}}" />
       <view class="u-icon" catchtap="save"></view>
@@ -19,7 +19,7 @@
   </view>
   <view class="c-variety f-border-radius-big" wx:if="{{isShowVariety}}">
     <view class="c-variety__item" wx:for="{{varieties}}" wx:key="index" style="--color:{{item.Color}}"  data-name="{{item.NoteBookName}}" data-id="{{item.NoteBookId}}" data-color="{{item.Color}}" bindtap="selectVariety">{{item.NoteBookName}}</view>
-    <view class="c-variety__item" data-id="0" data-name="未分类" data-color="#353535" bindtap="selectVariety">未分类</view>
+    <view class="c-variety__item" data-id="0" data-name="未分类" data-color="#393939" bindtap="selectVariety">未分类</view>
     <!-- <view class="c-variety__item">添加分类</view> -->
   </view>
   <canvas id="canvas" type="2d"></canvas>
