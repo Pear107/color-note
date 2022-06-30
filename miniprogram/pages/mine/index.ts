@@ -137,24 +137,6 @@ Component({
         console.log(err)
       })
     },
-    getLike() {
-      CustomPromise.all([CustomRequest('GET', `/note/like/${wx.getStorageSync('openid')}`, {})]).then((res: any) => {
-        this.setData({
-          ['boardData[0].value']: res.data
-        })
-      }, (err: any) => {
-        console.log(err)
-      })
-    },
-    getAgree() {
-      CustomPromise.all([CustomRequest('GET', `/note/agree/${wx.getStorageSync('openid')}`, {})]).then((res: any) => {
-        this.setData({
-          ['boardData[1].value']: res.data
-        })
-      }, (err: any) => {
-        console.log(err)
-      })
-    },
     onShow() {
       console.log('onShow')
     },

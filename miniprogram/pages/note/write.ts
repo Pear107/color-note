@@ -174,7 +174,8 @@ Component({
       this.setData({
         variety: e.currentTarget.dataset.name,
         bgColor: e.currentTarget.dataset.color,
-        varietyId: e.currentTarget.dataset.id
+        varietyId: e.currentTarget.dataset.id,
+        isSave:false
       })
     },
     save() {
@@ -190,7 +191,7 @@ Component({
             for (const match of res.html.matchAll(/http:\/\/tmp\/[a-zA-Z0-9]+\.png/g)) {
               console.log(match)
               wx.uploadFile({
-                filePath: match,
+                filePath: match[0],
                 name: "image",
                 url: 'https://newgym.cn/note/img/upload',
                 success: (ress: any) => {

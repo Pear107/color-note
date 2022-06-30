@@ -2,7 +2,7 @@
 <view class="container">
   <view class="c-page">
     <view class="c-page__item" hidden="{{tabIndex!==0}}">
-      <Variety id="variety"></Variety>
+      <Variety id="variety" bind:ready="onReady"></Variety>
     </view>
     <view class="c-page__item" hidden="{{tabIndex!==1}}">
       <Note id="note"></Note>

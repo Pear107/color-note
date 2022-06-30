@@ -114,7 +114,7 @@ Component({
       } else {
         CustomPromise.all([CustomRequest('DELETE', `/notebook/delete/${that.data.varietyId}`)]).then((res: any) => {
           console.log(res)
-          that.getVarieties()
+          that.triggerEvent('ready')
         }, (err: any) => {
           console.log(err)
         })
