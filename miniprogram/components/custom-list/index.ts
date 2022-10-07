@@ -9,9 +9,12 @@ Component({
       type:Array,
       value:[]
     },
-    top:{
-      type:Number,
-      value:20
+    height:{
+      type:String,
+      value:'auto'
+    },
+    path:{
+      type:String,
     }
   },
 
@@ -26,6 +29,18 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    push(e:any){
+      const ui = wx.getStorageSync('ui')
+      if(ui?.nickName&&ui?.avatarUrl&&ui?.openid){
+        wx.navigateTo({
+          url:`/pages/${this.data.path}/${e.currentTarget.dataset.route}`,
+        })
+      }else{
+        wx.showModal({
+          title:'请登录',
+          showCancel: false,
+        })
+      }
+    }
   }
 })

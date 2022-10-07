@@ -8,21 +8,24 @@
       <Note id="note"></Note>
     </view>
     <view class="c-page__item" hidden="{{tabIndex!==2}}">
+      <Todo id="todo"></Todo>
+    </view>
+    <view class="c-page__item" hidden="{{tabIndex!==3}}">
       <Mine id="mine"></Mine>
     </view>
   </view>
   <view class="c-tabBar f-box-shadow">
-    <view class="c-tabBar__item {{tabIndex===0?'active':''}}" bindtap="toVariety">
-      <view class="u-icon"></view>
-      <view class="u-text">{{list[0].text}}</view>
+    <view class="c-tabBar__item" bindtap="toVariety">
+      <image class="u-icon" src="{{tabIndex === 0? list[0].selectedIconPath:list[0].iconPath}}" />
     </view>
-    <view class="c-tabBar__item {{tabIndex===1?'active':''}}" bindtap="toNote">
-      <view class="u-icon"></view>
-      <view class="u-text">{{list[1].text}}</view>
+    <view class="c-tabBar__item" bindtap="toNote">
+      <image class="u-icon" src="{{tabIndex === 1? list[1].selectedIconPath:list[1].iconPath}}" />
     </view>
-    <view class="c-tabBar__item {{tabIndex===2?'active':''}}" bindtap="toMine">
-      <view class="u-icon"></view>
-      <view class="u-text">{{list[2].text}}</view>
+    <view class="c-tabBar__item" bindtap="toTodo">
+      <image class="u-icon" src="{{tabIndex === 2? list[2].selectedIconPath:list[2].iconPath}}" />
+    </view>
+    <view class="c-tabBar__item" bindtap="toMine">
+      <image class="u-icon" src="{{tabIndex === 3? list[3].selectedIconPath:list[3].iconPath}}" />
     </view>
   </view>
 </view>

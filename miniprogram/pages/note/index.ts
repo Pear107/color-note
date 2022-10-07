@@ -32,7 +32,6 @@ Component({
   pageLifetimes:{
     show(){
       console.log('show')
-      this.getNoteList()
     },
     hide(){
       console.log('hidden')
@@ -106,10 +105,8 @@ Component({
       })
     },
     onShow(){
-      console.log('onShow')
     },
     onHidden(){
-      console.log('onHidden')
       this.cancel()
       this.hiddenToast()
     }

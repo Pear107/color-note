@@ -1,0 +1,4 @@
+<!--pages/mine/connection.wxml-->
+<view class="container">
+  <CustomNavigation showBack="{{true}}" backText="返回"></CustomNavigation>
+</view>

@@ -4,7 +4,15 @@
     "pages/note/write",
     "pages/variety/noteList",
     "pages/variety/view",
-    "pages/logs/logs"
+    "pages/todo/todo",
+    "pages/logs/logs",
+    "pages/mine/calendar",
+    "pages/mine/set",
+    "pages/mine/timeline",
+    "pages/mine/handbook",
+    "pages/mine/connection",
+    "pages/mine/feedback",
+    "pages/mine/about"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -14,8 +22,17 @@
   "sitemapLocation": "sitemap.json",
   "plugins": {
     "chatbot": {
-      "version": "1.2.43",
+      "version": "1.2.44",
       "provider": "wx8c631f7e9f2465e1"
+    },
+    "weui":{
+      "version": "1.0.15",
+      "provider": "wxfa43a4a7041a84de"
     }
+  },
+  "usingComponents": {
+    "CustomNavigation":"/components/custom-navigation/index",
+    "CustomToast":"/components/custom-toast/index",
+    "CustomModal": "/components/custom-modal/index"
   }
 }

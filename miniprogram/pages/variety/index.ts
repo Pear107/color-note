@@ -33,7 +33,6 @@ Component({
    */
   pageLifetimes:{
     show(){
-      this.getVarieties()
     }
   },
 
@@ -146,10 +145,8 @@ Component({
       })
     },
     onShow(){
-      console.log('onShow')
     },
     onHidden(){
-      console.log('onHidden')
       this.cancel()
     }
   }

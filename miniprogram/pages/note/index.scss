@@ -1,11 +1,6 @@
 /* pages/note/index.wxss */
 @import '../../app.scss';
 
-.container {
-  background:linear-gradient(135deg,#feac5e,#c779d0,#4bc0c8);
-  background-blend-mode: screen;
-}
-
 .c-search {
   position: relative;
   display: flex;
@@ -47,7 +42,6 @@
     right: 30rpx;
     width: 32rpx;
     height: 32rpx;
-    background: url(https://newgym.cn/color-note/search.png) no-repeat center/cover;
   }
 }
 

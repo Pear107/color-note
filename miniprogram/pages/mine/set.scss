@@ -1,0 +1,71 @@
+/* pages/mine/set.wxss */
+.avatarUrl{
+  width: 400rpx;
+  height: 400rpx;
+  border-radius: 200rpx;
+}
+.avatarUrlBtn{
+  margin: 40rpx 0;
+}
+.set{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  background: var(--bg-color-white);
+  &__item{
+    display: flex;
+    align-items: center;
+    column-gap: 100rpx;
+    position: relative;
+    width: 80%;
+    height: 100rpx;
+    border-bottom: 1rpx solid var(--shadow-color-gray);
+    &__rollBack{
+      position: absolute;
+      right: 0;
+      width: 32rpx;
+      height: 32rpx;
+    }
+  }
+  .avatar{
+    position: absolute;
+    bottom: 0%;
+    width: inherit;
+    height: 100%;
+    background: var(--bg-color-white);
+    overflow: hidden;
+    -webkit-transition: all ease-out .3s;
+    transition: all ease-out .3s;
+    z-index: 1;
+    &__item{
+      float: left;
+      width: 25vw;
+      height: 25vw;
+      box-sizing: border-box;
+      border: 1vw solid transparent;
+    }
+    &__item.active{
+      border: 1vw solid var(--btn-bg-green);
+    }
+    .custom{
+      background: var(--bg-color);
+      text-align: center;
+      line-height: 25vw;
+      color: var(--text-color-gray);
+    }
+  }
+  .avatar.hidden{
+    height: 0;
+    -webkit-transition: all ease-out .3s;
+    transition: all ease-out .3s;
+  }
+}
+.clip{
+  position: absolute;
+  background: #000;
+  height: 100vh;
+  z-index: 2;
+}

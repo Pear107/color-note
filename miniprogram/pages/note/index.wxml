@@ -25,7 +25,7 @@
   <CustomNavigation></CustomNavigation>
   <view class="c-search">
     <input class="c-search__ipt f-box-shadow" maxlength="25" placeholder="搜索" placeholder-style="color:#721b6580;" />
-    <view class="c-search__btn"></view>
+    <image class="c-search__btn" src="../../assets/images/search.png" />
   </view>
   <view class="c-noteList">
     <view class="c-noteList__item f-box-shadow f-border-radius" wx:for="{{noteList}}" wx:key="index" bindtap="enterNote" data-id="{{noteList[index].NoteId}}" capture-bind:longpress="deleteNote">

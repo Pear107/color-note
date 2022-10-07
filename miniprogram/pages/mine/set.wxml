@@ -1,0 +1,30 @@
+<!--pages/mine/set.wxml-->
+<import src="../../miniprogram_modules/we-cropper/dist/we-cropper.wxml" />
+<view class="container">
+  <CustomNavigation showBack="{{true}}" backText="返回"></CustomNavigation>
+  <CustomModal id="modal"></CustomModal>
+  <CustomToast id="toast"></CustomToast>
+  <image class="avatarUrl" src="{{avatarUrl}}" />
+  <button class="avatarUrlBtn" bindtap="setAvatar">设置头像</button>
+  <view class="set">
+    <label class="set__item">
+      <text class="set__item__name">昵称</text>
+      <input class="set__item__input" value="{{nickName}}" placeholder="请输入昵称" maxlength="8" bindinput="inputNickName" />
+      <image class="set__item__rollBack" src="../../assets/images/rollBack.png" bindtap="rollBackName" />
+    </label>
+    <button class="btn-confirm" bindtap="confirm">确认</button>
+    <view class="avatar {{isShowAvatar?'':'hidden'}}">
+      <image class="avatar__item {{selectIndex === index ? 'active' : ''}}" wx:for="{{avatar}}" wx:key="index" src="{{avatar[index]}}" catchtap="select" data-index="{{index}}" />
+      <view class="avatar__item custom {{selectIndex === 7 ? 'active' : ''}}" bindtap="custom">自定义</view>
+      <canvas id="canvas" canvas-id="canvas" hidden="{{true}}" type="2d"></canvas>
+      <button class="btn-cancel" bindtap="rollBackAvatar">重置</button>
+    </view>
+  </view>
+  <view class="clipbg clip" wx:if="{{clip}}">
+    <view class="cropper-wrapper">
+        <template is="we-cropper" data="{{...cropperOpt}}" />
+    </view>
+    <button bindtap="cancelCropperImage">取消</button>
+    <button class="btn-confirm" bindtap="getCropperImage">确认</button>
+  </view>
+</view>

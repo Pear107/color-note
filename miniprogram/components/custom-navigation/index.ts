@@ -43,3 +43,5 @@ Component({
     }
   }
 })
+
+export {}

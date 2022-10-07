@@ -1,2 +1,4 @@
 <!--pages/mine/feedback.wxml-->
-<text>pages/mine/feedback.wxml</text>
+<view class="container">
+  <CustomNavigation showBack="{{true}}" backText="返回"></CustomNavigation>
+</view>

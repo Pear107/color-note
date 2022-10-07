@@ -1,7 +1,7 @@
 // pages/mine/index.ts
-const app = getApp()
 import CustomPromise from '../../utils/customPromise';
 import CustomRequest from '../../utils/customRequest';
+const app = getApp<IAppOption>()
 Component({
   /**
    * 组件的属性列表
@@ -13,26 +13,29 @@ Component({
    * 组件的初始数据
    */
   data: {
-    nickName: '',
-    avatarUrl: '',
+    nickName: app.store.nickName,
+    avatarUrl: app.store.avatarUrl,
     boardData: [
       {
-        key: '喜欢',
+        key: '笔记',
         value: 0
       }, {
-        key: '点赞',
+        key: '任务',
         value: 0
       },
       {
-        key: '笔记',
+        key: '计划',
         value: 0
       }
     ],
     listData: [
-      {
-        text: '反馈问题'
-      },
-      { text: '关于我们' }
+      { text: '设置', route:'set' },
+      { text: '日历', route:'calendar' },
+      { text: '时间轴', route: 'timeline' },
+      { text: '使用指南', route: 'handbook' },
+      { text: '联系客服', route: 'connection' },
+      { text: '意见反馈', route: 'feedback' },
+      { text: '关于我们', route: 'about' },
     ]
   },
 
@@ -41,24 +44,18 @@ Component({
    */
   lifetimes: {
     attached() {
-      console.log('attached')
-      this.getLike()
-      this.getAgree()
-      this.setData({
-        nickName: app.globalData.nickName,
-        avatarUrl: app.globalData.avatarUrl
-      })
+
     }
   },
 
   /**
    * 组件页面生命周期
    */
-  pageLifetimes:{
-    show(){
+  pageLifetimes: {
+    show() {
       console.log('show')
     },
-    hide(){
+    hide() {
       console.log('hidden')
     }
   },
@@ -71,66 +68,27 @@ Component({
      * 登录事件
      */
     login() {
-      const that = this
-      new CustomPromise((resolve: Function, reject: Function) => {
-        if (this.data.avatarUrl === '') {
-          resolve()
-        } else {
-          reject()
-        }
-      }).then(() => {
-        return new CustomPromise((resolve: Function, reject: Function) => {
-          wx.getUserProfile({
-            desc: "获取微信名和头像",
-            lang: 'zh_CN',
-            success: (res: any) => {
-              resolve(res.rawData)
-            },
-            fail: (err: any) => {
-              reject(err)
-            }
+      const ui = wx.getStorageSync('ui')
+      if(!ui?.openid||!ui?.nickName||!ui?.avatarUrl){
+        wx.clearStorage()
+        const that = this
+        wx.cloud.callFunction({
+          name: 'login'
+        }).then((res: any)=>{
+          that.setData({
+            nickName: res.result.nickName,
+            avatarUrl:res.result.avatarUrl,
+            openid: res.result.openid,
           })
-        })
-      }, () => {
-        console.log('已登录')
-      }).then((rawData: string) => {
-        return new CustomPromise((resolve: Function, reject: Function) => {
-          wx.login({
-            success: (res) => {
-              console.log(res)
-              if (res.errMsg === "login:ok") {
-                wx.setStorageSync('nickName', JSON.parse(rawData).nickName)
-                wx.setStorageSync('avatarUrl', JSON.parse(rawData).avatarUrl)
-                resolve(res.code)
-              } else {
-                reject("登录失败")
-              }
-            },
-            fail: ((err) => {
-              reject(err)
-            })
+          wx.setStorageSync('ui',{
+            nickName: res.result.nickName,
+            avatarUrl: res.result.avatarUrl,
+            openid: res.result.openid,
           })
+        }).catch((err)=>{
+          console.error(err);
         })
-      }, (err: any) => {
-        console.log(err)
-      }).then((code: string) => {
-        console.log('code 在这里')
-        console.log(code)
-        return CustomRequest('POST', `/user/signup`, { code })
-      }, (err: any) => {
-        console.log(err)
-      }).then((value: any) => {
-        console.log(value)
-        wx.setStorageSync('token', value.token)
-        wx.setStorageSync('openid', value.openid)
-        that.setData({
-          nickName: wx.getStorageSync('nickName'),
-          avatarUrl: wx.getStorageSync('avatarUrl')
-        })
-      }, (err: any) => {
-        wx.clearStorageSync()
-        console.log(err)
-      })
+      }
     },
     getLike() {
       CustomPromise.all([CustomRequest('GET', `/note/like/${wx.getStorageSync('openid')}`, {})]).then((res: any) => {
@@ -150,11 +108,9 @@ Component({
         console.log(err)
       })
     },
-    onShow(){
-      console.log('onShow')
+    onShow() {
     },
-    onHidden(){
-      console.log('onHidden')
+    onHidden() {
     }
   }
 })

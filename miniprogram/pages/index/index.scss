@@ -12,7 +12,8 @@
     width: 100%;
     height: calc(100vh - 100rpx);
   }
-  &__item.hidden{
+
+  &__item.hidden {
     display: none;
   }
 }
@@ -27,6 +28,9 @@
   padding-bottom: calc(env(safe-area-inset-bottom) / 2);
   z-index: 999;
   background: var(--bg-color-white);
+  -webkit-box-shadow: 0px -5px 26px 0px rgba(62, 66, 66, 0.1);
+  -moz-box-shadow: 0px -5px 26px 0px rgba(62, 66, 66, 0.1);
+  box-shadow: 0px -5px 26px 0px rgba(62, 66, 66, 0.1);
 
   &__item {
     display: flex;
@@ -49,42 +53,6 @@
   &__item.active {
     .u-text {
       color: var(--base-color) !important;
-    }
-  }
-
-  .c-tabBar__item:nth-child(1) {
-    .u-icon {
-      background: url(https://newgym.cn/color-note/variety.png) no-repeat center/cover;
-    }
-  }
-
-  .c-tabBar__item:nth-child(2) {
-    .u-icon {
-      background: url(https://newgym.cn/color-note/note.png) no-repeat center/cover;
-    }
-  }
-
-  .c-tabBar__item:nth-child(3) {
-    .u-icon {
-      background: url(https://newgym.cn/color-note/mine.png) no-repeat center/cover;
-    }
-  }
-
-  .c-tabBar__item:nth-child(1).active {
-    .u-icon {
-      background: url(https://newgym.cn/color-note/variety_active.png) no-repeat center/cover;
-    }
-  }
-
-  .c-tabBar__item:nth-child(2).active {
-    .u-icon {
-      background: url(https://newgym.cn/color-note/note_active.png) no-repeat center/cover;
-    }
-  }
-
-  .c-tabBar__item:nth-child(3).active {
-    .u-icon {
-      background: url(https://newgym.cn/color-note/mine_active.png) no-repeat center/cover;
     }
   }
 }

@@ -1,9 +1,15 @@
 /* components/custom-list/index.wxss */
 @import '../../app.scss';
+.container{
+  padding: 20rpx 0;
+  overflow-y: scroll;
+  background: var(--bg-color);
+}
 .c-list{
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 702rpx;
-  height: auto;
   background: var(--bg-color-white);
   &__item{
     height: 80rpx;

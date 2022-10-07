@@ -13,10 +13,10 @@
   height: 200rpx;
   border-radius: 16rpx;
   background:var(--bg-color-black);
+  z-index: 999;
   &__icon{
     width: 80rpx;
     height: 80rpx;
-    background: var(--icon) no-repeat center/cover;
   }
   &__text{
     color:var(--text-color-white);

@@ -1,8 +1,14 @@
 <!--pages/mine/index.wxml-->
 <view class="container">
   <view class="c-head">
-    <view class="c-head__image" style="background-image: url({{avatarUrl}});" bindtap="login"></view>
+    <image class="c-head__image" src="{{avatarUrl}}" bindtap="login" />
     <view class="c-head__text">{{nickName}}</view>
+    <view class="water">
+      <view class="water-c">
+        <view class="water-1"> </view>
+        <view class="water-2"> </view>
+      </view>
+    </view>
   </view>
   <view class="c-board">
     <view class="c-board__item" wx:for="{{boardData}}" wx:key="index">
@@ -10,5 +16,5 @@
       <view class="u-value">{{boardData[index].value}}</view>
     </view>
   </view>
-  <CustomList listData="{{listData}}"></CustomList>
+  <CustomList listData="{{listData}}" height="calc(100vh - 800rpx)" path="mine"></CustomList>
 </view>
