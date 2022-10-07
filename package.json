@@ -8,5 +8,8 @@
   "license": "",
   "devDependencies": {
     "miniprogram-api-typings": "3.6.0"
+  },
+  "dependencies": {
+    "we-cropper": "^1.4.0"
   }
 }

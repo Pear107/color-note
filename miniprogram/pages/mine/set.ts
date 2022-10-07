@@ -1,6 +1,6 @@
 // pages/mine/set.ts
-import WeCropper from "../../miniprogram_modules/we-cropper/dist/we-cropper"
-import { WeCropper as IWeCropper } from "../../miniprogram_modules/we-cropper/types/we-cropper"
+import WeCropper from "we-cropper"
+import { Options } from "../../miniprogram_modules/we-cropper/types/options"
 const app = getApp<IAppOption>()
 // 定义 data 数据类型
 interface TData {
@@ -17,7 +17,7 @@ interface TData {
 }
 // 扩展 Page 方法与变量
 interface TPage {
-  wecropper: IWeCropper | null;
+  wecropper: WeCropper | null;
   setAvatar: () => void;
   selectAvatar: (e: any) => void;
   customAvatar: () => void,
@@ -89,8 +89,8 @@ Page<TData, TPage>({
     })
 
     // 实例化 WeCropper
-    const { cropperOpt } = this.data
-    this.wecropper = new WeCropper(cropperOpt) as unknown as IWeCropper
+    const cropperOpt = this.data.cropperOpt as Options.ConstructorOption
+    this.wecropper = new WeCropper(cropperOpt)
     this.wecropper.on(
       'ready', () => {
         console.log(`wecropper is ready for work`)
