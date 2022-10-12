@@ -14,21 +14,21 @@ interface TData {
 type TProperty = {
   height: {
     type: NumberConstructor;
-    value: number
+    value?: number;
   };
   customContent: {
-    type: BooleanConstructor
-    value: boolean;
+    type: BooleanConstructor;
+    value?: boolean;
   };
-}
+};
 // 用 interface 会报错缺少索引签名
 type TMethod = {
   confirm: () => void;
   cancel: () => void;
   showModal: (options: CustomModal) => void;
   hiddenModal: () => void;
-}
-interface TCustomInstanceProperty {}
+};
+type TCustomInstanceProperty = {};
 type TIsPage = false;
 Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
   /**
@@ -63,19 +63,19 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
   methods: {
     confirm() {
       // this.triggerEvent("parentConfirm");
-      this.data.confirm()
-      this.hiddenModal()
+      this.data.confirm();
+      this.hiddenModal();
     },
     cancel() {
       // this.triggerEvent("parentCancel");
-      this.data.cancel()
-      this.hiddenModal()
+      this.data.cancel();
+      this.hiddenModal();
     },
     showModal(options: CustomModal) {
       const isShow = !this.data.isShow;
       const {
-        caption = '标题',
-        content = '',
+        caption = "标题",
+        content = "",
         confrim = () => {},
         cancel = () => {},
         showContent = true,
@@ -97,14 +97,15 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
       const isShow = !this.data.isShow;
       this.setData({
         isShow: isShow,
-        caption: '',
-        content: '',
+        caption: "",
+        content: "",
         confirm: () => {},
         cancel: () => {},
         showContent: true,
         showCancel: true,
-        customContent: false
+        customContent: false,
       });
     },
   },
 });
+export {};

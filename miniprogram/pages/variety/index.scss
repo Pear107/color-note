@@ -13,7 +13,7 @@
   overflow: scroll;
   // color: #f9d3e3;
   color: var(--text-color-white);
-  &__community,&__star,&__item,&__add{
+  &__date,&__star,&__item,&__add{
     display: grid;
     grid-template-columns: repeat(2,1fr);
     place-items: center;
@@ -34,7 +34,7 @@
   &__add{
     margin-bottom: 20rpx;
   }
-  &__community{
+  &__date{
     width: 100% !important;
     height: 300rpx !important;
     background:var(--variety-color-pink);

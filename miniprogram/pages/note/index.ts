@@ -2,10 +2,13 @@
 import CustomPromise from '../../utils/customPromise';
 import CustomRequest from '../../utils/customRequest';
 import noteList from '../variety/noteList';
-const app=getApp()
-
-Component({
-
+const app=getApp<IAppOption>()
+type TData = {}
+type TProperty = {}
+type TMethod = {}
+type TCustomInstanceProperty = {}
+type TIsPage = true
+Component<TData, TProperty, TData, TCustomInstanceProperty, TIsPage>({
   /**
    * 组件的初始数据
    */
@@ -43,74 +46,23 @@ Component({
    */
   methods: {
     enterNote(e:any){
-      let id=e.currentTarget.dataset.id
-      wx.navigateTo({
-        url:`../note/write?id=${id}`
-      })
     },
     deleteNote(){
-      console.log('hello world')
-      this.setData({
-        isShowModal:true
-      })
     },
     addNote(){
-      if(wx.getStorageSync('token')){
-        CustomPromise.all([CustomRequest('POST','/note/upload',{})]).then((res:any)=>{
-          console.log(res[0].data)
-          wx.navigateTo({
-            url:`../note/write?id=${res[0].data}`
-          })
-        },(err:any)=>{
-          console.log(err)
-        })
-      }else{
-
-      }
     },
     confirm(){
-      this.setData({
-        isShowModal:false
-      })
     },
     cancel(){
-      this.setData({
-        isShowModal:false
-      })
     },
     getNoteList(){
-      CustomPromise.all([CustomRequest('GET',`/note/notebook/0`,{})]).then((res:any)=>{
-        console.log(res)
-        this.setData({
-          noteList:res[0].data.reverse()
-        })
-        console.log(noteList)
-      },(err:any)=>{
-        console.log(err)
-      })
     },
-    showToast(){
-      this.setData({
-        isShowToast:true
-      })
-      setTimeout(()=>{
-        this.setData({
-          isShowToast:false
-        })
-      },1000)
+    show() {
+      console.log('show')
     },
-    hiddenToast(){
-      this.setData({
-        isShowToast:false
-      })
+    hide() {
+      console.log('hide')
     },
-    onShow(){
-    },
-    onHidden(){
-      this.cancel()
-      this.hiddenToast()
-    }
   }
 })
-
-export default{}
+export {}

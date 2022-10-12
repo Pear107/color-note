@@ -9,7 +9,8 @@ type GlobalData = {
   varieties: Array<{name: string, color: string}>;
 }
 
-type Store = {
+type UserInfo = {
+  [key: string]: string;
   nickName: string;
   avatarUrl: string;
   openid: string;
@@ -17,7 +18,6 @@ type Store = {
 
 interface IAppOption {
   globalData: GlobalData;
-  store: Store;
   userInfoReadyCallback?: WechatMiniprogram.GetUserInfoSuccessCallback;
   showModal: (that: any, options: CustomModal) => void;
   hiddenModal: (that: any) => void;

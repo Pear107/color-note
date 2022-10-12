@@ -1,42 +1,62 @@
 // pages/mine/index.ts
-import CustomPromise from '../../utils/customPromise';
-import CustomRequest from '../../utils/customRequest';
-const app = getApp<IAppOption>()
-Component({
+import { useInfoStore } from "../../store/index";
+import checkLogin from "../../behavior/checkLogin";
+// 定义初始数据类型
+type TData = {
+  nickName: string;
+  avatarUrl: string;
+  boardData: Array<{ key: string; value: number }>;
+  routeData: Array<RouteData>;
+};
+// 定义属性列表
+type TProperty = {};
+type TMethod = {
+  show: () => void;
+  hide: () => void;
+  login: () => void;
+};
+// 定义自定义属性，或者是 behavior 的属性
+type TCustomInstanceProperty = {
+  checkLogin: () => boolean;
+};
+// 定义是否是页面
+type TIsPage = true;
+Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
+  behaviors: [checkLogin],
   /**
    * 组件的属性列表
    */
-  properties: {
-  },
+  properties: {},
 
   /**
    * 组件的初始数据
    */
   data: {
-    nickName: app.store.nickName,
-    avatarUrl: app.store.avatarUrl,
+    nickName: "",
+    avatarUrl: "",
     boardData: [
       {
-        key: '笔记',
-        value: 0
-      }, {
-        key: '任务',
-        value: 0
+        key: "笔记",
+        value: 0,
       },
       {
-        key: '计划',
-        value: 0
-      }
+        key: "任务",
+        value: 0,
+      },
+      {
+        key: "计划",
+        value: 0,
+      },
     ],
-    listData: [
-      { text: '设置', route:'set' },
-      { text: '日历', route:'calendar' },
-      { text: '时间轴', route: 'timeline' },
-      { text: '使用指南', route: 'handbook' },
-      { text: '联系客服', route: 'connection' },
-      { text: '意见反馈', route: 'feedback' },
-      { text: '关于我们', route: 'about' },
-    ]
+    routeData: [
+      { key: 0, name: "设置", route: "set" },
+      { key: 1, name: "日历", route: "calendar" },
+      { key: 2, name: "时间轴", route: "timeline" },
+      { key: 3, name: "使用指南", route: "handbook" },
+      { key: 4, name: "联系客服", route: "connection" },
+      { key: 5, name: "意见反馈", route: "feedback" },
+      { key: 6, name: "关于我们", route: "about" },
+    ],
   },
 
   /**
@@ -44,7 +64,11 @@ Component({
    */
   lifetimes: {
     attached() {
-
+      this.setData({
+        nickName: useInfoStore.getData("nickName"),
+        avatarUrl: useInfoStore.getData("avatarUrl"),
+      });
+      useInfoStore.addPage(this);
     }
   },
 
@@ -53,64 +77,53 @@ Component({
    */
   pageLifetimes: {
     show() {
-      console.log('show')
+      console.log("show");
     },
     hide() {
-      console.log('hidden')
-    }
+      console.log("hidden");
+    },
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    /**
-     * 登录事件
-     */
+    // tab 切换到当前页面触发
+    show() {
+      console.log('show')
+    },
+
+    // tab 切换到其他页面触发
+    hide() {
+      console.log('hide')
+    },
+
+    // 登录
     login() {
-      const ui = wx.getStorageSync('ui')
-      if(!ui?.openid||!ui?.nickName||!ui?.avatarUrl){
-        wx.clearStorage()
-        const that = this
-        wx.cloud.callFunction({
-          name: 'login'
-        }).then((res: any)=>{
-          that.setData({
-            nickName: res.result.nickName,
-            avatarUrl:res.result.avatarUrl,
-            openid: res.result.openid,
-          })
-          wx.setStorageSync('ui',{
-            nickName: res.result.nickName,
-            avatarUrl: res.result.avatarUrl,
-            openid: res.result.openid,
-          })
-        }).catch((err)=>{
-          console.error(err);
-        })
+      if (!this.checkLogin()) {
+        const ui: UserInfo = wx.getStorageSync("ui");
+        if (!ui.openid || !ui.nickName || !ui.avatarUrl) {
+          wx.clearStorage();
+          wx.cloud
+            .callFunction({
+              name: "login",
+            })
+            .then((res: any) => {
+              console.log("success");
+              useInfoStore.setData("nickName", res.result.nickName);
+              useInfoStore.setData("avatarUrl", res.result.avatarUrl);
+              wx.setStorageSync("ui", {
+                nickName: res.result.nickName,
+                avatarUrl: res.result.avatarUrl,
+                openid: res.result.openid,
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
       }
     },
-    getLike() {
-      CustomPromise.all([CustomRequest('GET', `/note/like/${wx.getStorageSync('openid')}`, {})]).then((res: any) => {
-        this.setData({
-          ['boardData[0].value']: res.data
-        })
-      }, (err: any) => {
-        console.log(err)
-      })
-    },
-    getAgree() {
-      CustomPromise.all([CustomRequest('GET', `/note/agree/${wx.getStorageSync('openid')}`, {})]).then((res: any) => {
-        this.setData({
-          ['boardData[1].value']: res.data
-        })
-      }, (err: any) => {
-        console.log(err)
-      })
-    },
-    onShow() {
-    },
-    onHidden() {
-    }
-  }
-})
+  },
+});
+export {};

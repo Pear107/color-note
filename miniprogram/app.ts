@@ -1,11 +1,8 @@
 // app.ts
 // 在 typings/types/index.d.ts 定义数据
+import {useInfoStore} from './store/index'
+
 App<IAppOption>({
-  store: {
-    nickName: '点击头像登录',
-    avatarUrl: '../../assets/images/default.png',
-    openid: '',
-  },
   globalData: {
     StatusBar: 0,
     Custom: null,
@@ -41,11 +38,11 @@ App<IAppOption>({
     wx.setStorageSync('logs', logs)
 
     // 获取 openid
-    const ui = wx.getStorageSync('ui')
+    const ui: UserInfo = wx.getStorageSync('ui') ?? {}
     if(ui?.nickName && ui?.avatarUrl && ui?.openid){
-      this.store.nickName = ui.nickName
-      this.store.avatarUrl = ui.avatarUrl
-      this.store.openid = ui.openid
+      useInfoStore.setData('nickName', ui.nickName)
+      useInfoStore.setData('avatarUrl', ui.avatarUrl)
+      useInfoStore.setData('openid', ui.openid)
     }else{
       wx.clearStorage()
     }

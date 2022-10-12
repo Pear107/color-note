@@ -1,8 +1,8 @@
 <!--pages/mine/index.wxml-->
 <view class="container">
   <view class="c-head">
-    <image class="c-head__image" src="{{avatarUrl}}" bindtap="login" />
-    <view class="c-head__text">{{nickName}}</view>
+    <image class="c-head__image" src="{{avatarUrl?avatarUrl:'../../assets/images/default.png'}}" bindtap="login" />
+    <view class="c-head__text">{{nickName?nickName:'点击头像登录'}}</view>
     <view class="water">
       <view class="water-c">
         <view class="water-1"> </view>
@@ -16,5 +16,5 @@
       <view class="u-value">{{boardData[index].value}}</view>
     </view>
   </view>
-  <CustomList listData="{{listData}}" height="calc(100vh - 800rpx)" path="mine"></CustomList>
+  <RouteList routeData="{{routeData}}" height="calc(100vh - 800rpx)" path="mine"></RouteList>
 </view>

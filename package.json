@@ -10,6 +10,7 @@
     "miniprogram-api-typings": "3.6.0"
   },
   "dependencies": {
+    "@vant/weapp": "^1.10.5",
     "we-cropper": "^1.4.0"
   }
 }

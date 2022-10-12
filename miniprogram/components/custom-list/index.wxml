@@ -1,9 +1,0 @@
-<!--components/custom-list/index.wxml-->
-<view  class="container" style="height: {{height}};">
-  <view class="c-list f-border-radius">
-    <view class="c-list__item" wx:for="{{listData}}" wx:key="index" data-route="{{listData[index].route}}" catchtap="push">
-      <view class="u-icon" style="background: {{listData[index].icon}};"></view>
-      <view class="u-text">{{listData[index].text}}</view>
-    </view>
-  </view>
-</view>

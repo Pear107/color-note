@@ -1,12 +1,13 @@
 // pages/todo/index.ts
-Component({
-  /**
-   * 组件的属性列表
-   */
-  properties: {
-
-  },
-
+type TData = {}
+type TProperty = {}
+type TMethod = {
+  show: () => void;
+  hide: () => void;
+}
+type TCustomInstanceProperty = {}
+type TIsPage = true
+Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
   /**
    * 组件的初始数据
    */
@@ -18,9 +19,13 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onShow() {
+    show(){
+      console.log('show')
     },
-    onHidden() {
+    hide(){
+      console.log('hide')
     }
   }
 })
+
+export {}
