@@ -1,7 +1,7 @@
 // pages/mine/set.ts
-import WeCropper from "../../miniprogram_modules/we-cropper/dist/we-cropper";
-import { Options } from "../../miniprogram_modules/we-cropper/types/options";
-import IWeCropper from "../../miniprogram_modules/we-cropper/types/we-cropper";
+import WeCropper from "we-cropper";
+import { Options } from "../../../node_modules/we-cropper/types/options";
+import IWeCropper from "../../../node_modules/we-cropper/types/we-cropper";
 import { useInfoStore } from "../../store/index";
 const app = getApp<IAppOption>();
 const device = wx.getSystemInfoSync();
@@ -246,7 +246,7 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
           }
           wx.cloud
             .callFunction({
-              name: "setUserInfo",
+              name: "updateUserInfo",
               data: data,
             })
             .then((res) => {
