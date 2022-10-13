@@ -23,14 +23,6 @@ type TCustomInstanceProperty = {
 type TIsPage = true;
 Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
   behaviors: [checkLogin],
-  /**
-   * 组件的属性列表
-   */
-  properties: {},
-
-  /**
-   * 组件的初始数据
-   */
   data: {
     nickName: "",
     avatarUrl: "",
@@ -69,15 +61,16 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
         avatarUrl: useInfoStore.getData("avatarUrl"),
       });
       useInfoStore.addPage(this);
-    }
+    },
   },
-
-  /**
-   * 组件页面生命周期
-   */
   pageLifetimes: {
     show() {
       console.log("show");
+      if (typeof this.getTabBar === "function" && this.getTabBar()) {
+        this.getTabBar().setData({
+          tabIndex: 3,
+        });
+      }
     },
     hide() {
       console.log("hidden");
@@ -90,12 +83,12 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
   methods: {
     // tab 切换到当前页面触发
     show() {
-      console.log('show')
+      console.log("show");
     },
 
     // tab 切换到其他页面触发
     hide() {
-      console.log('hide')
+      console.log("hide");
     },
 
     // 登录

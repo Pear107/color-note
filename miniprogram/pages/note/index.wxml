@@ -21,7 +21,7 @@
   }
   module.exports.formatTime=formatTime
 </wxs>
-<view class="container">
+<view class="container tab-page">
   <CustomNavigation></CustomNavigation>
   <view class="c-search">
     <input class="c-search__ipt f-box-shadow" maxlength="25" placeholder="搜索" placeholder-style="color:#721b6580;" />

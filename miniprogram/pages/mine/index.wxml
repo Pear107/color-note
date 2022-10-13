@@ -1,5 +1,5 @@
 <!--pages/mine/index.wxml-->
-<view class="container">
+<view class="container tab-page">
   <view class="c-head">
     <image class="c-head__image" src="{{avatarUrl?avatarUrl:'../../assets/images/default.png'}}" bindtap="login" />
     <view class="c-head__text">{{nickName?nickName:'点击头像登录'}}</view>

@@ -1,0 +1,6 @@
+<!--custom-tab-bar/index.wxml-->
+<view class="tabBar">
+  <view class="item" wx:for="{{list}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+    <image class="icon" src="{{tabIndex === index ? item.selectedIconPath : item.iconPath}}" data-index="{{index}}" catchtap="switchTab" />
+  </view>
+</view>

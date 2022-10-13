@@ -1,5 +1,5 @@
 <!--pages/variety/index.wxml-->
-<view class="container">
+<view class="container tab-page">
   <CustomNavigation></CustomNavigation>
   <view class="c-variety">
     <view class="c-variety__date f-border-radius" bindtap="enterVariety" data-color="#b68ed4">

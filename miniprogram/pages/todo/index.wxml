@@ -1,2 +1,2 @@
 <!--pages/todo/index.wxml-->
-<view class="container"></view>
+<view class="container tab-page"></view>

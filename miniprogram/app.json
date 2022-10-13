@@ -1,6 +1,9 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/mine/index",
+    "pages/variety/index",
+    "pages/note/index",
+    "pages/todo/index",
     "pages/note/write",
     "pages/variety/noteList",
     "pages/variety/view",
@@ -14,6 +17,31 @@
     "pages/mine/feedback",
     "pages/mine/about"
   ],
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "selectedIconPath": "./assets/images/tabBar/variety_active.png",
+        "iconPath": "./assets/images/tabBar/variety.png",
+        "pagePath": "pages/variety/index"
+      },
+      {
+        "selectedIconPath": "./assets/images/tabBar/note_active.png",
+        "iconPath": "./assets/images/tabBar/note.png",
+        "pagePath": "pages/note/index"
+      },
+      {
+        "selectedIconPath": "./assets/images/tabBar/todo_active.png",
+        "iconPath": "./assets/images/tabBar/todo.png",
+        "pagePath": "pages/todo/index"
+      },
+      {
+        "selectedIconPath": "./assets/images/tabBar/mine_active.png",
+        "iconPath": "./assets/images/tabBar/mine.png",
+        "pagePath": "pages/mine/index"
+      }
+    ]
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationStyle": "custom"

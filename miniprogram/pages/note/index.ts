@@ -8,7 +8,7 @@ type TProperty = {}
 type TMethod = {}
 type TCustomInstanceProperty = {}
 type TIsPage = true
-Component<TData, TProperty, TData, TCustomInstanceProperty, TIsPage>({
+Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
   /**
    * 组件的初始数据
    */
@@ -35,6 +35,11 @@ Component<TData, TProperty, TData, TCustomInstanceProperty, TIsPage>({
   pageLifetimes:{
     show(){
       console.log('show')
+      if (typeof this.getTabBar === "function" && this.getTabBar()) {
+        this.getTabBar().setData({
+          tabIndex: 1,
+        });
+      }
     },
     hide(){
       console.log('hidden')

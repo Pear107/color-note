@@ -6,9 +6,6 @@ type TMethod = {}
 type TCustomInstanceProperty = {}
 type TIsPage = true
 Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
-  /**
-   * 组件的初始数据
-   */
   data: {
     CustomBar: app.globalData.CustomBar,
     varieties: [],
@@ -21,21 +18,18 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
     modalStatus: 0,
     colorArray:["#c88f23","#b99192","#b5c07b","#dd8270","#bccdbb"]
   },
-
-  /**
-   * 组件生命周期
-   */
   lifetimes:{
     attached(){
       
     }
   },
-
-  /**
-   * 组件页面生命周期
-   */
   pageLifetimes:{
     show(){
+      if (typeof this.getTabBar === "function" && this.getTabBar()) {
+        this.getTabBar().setData({
+          tabIndex: 0,
+        });
+      }
     }
   },
 

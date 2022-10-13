@@ -19,6 +19,10 @@ page {
   background: linear-gradient(135deg, #ff75c3, #ffa647, #ffe83f, #9fff5b, #70e2ff, #cd93ff);
 }
 
+.tab-page{
+  height: calc(100% - 100rpx);
+}
+
 .f-box-shadow {
   box-shadow: 0rpx 5rpx 15rpx -3rpx var(--shadow-color-gray);
 }
