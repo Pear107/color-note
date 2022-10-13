@@ -1,2 +1,2 @@
 <!--pages/todo/todo.wxml-->
-<text>pages/todo/todo.wxml</text>
+<view class="container"></view>

@@ -16,5 +16,5 @@
       <view class="u-value">{{boardData[index].value}}</view>
     </view>
   </view>
-  <RouteList routeData="{{routeData}}" height="calc(100vh - 800rpx)" path="mine"></RouteList>
+  <RouteList routeData="{{routeData}}" height="40vh" path="mine"></RouteList>
 </view>

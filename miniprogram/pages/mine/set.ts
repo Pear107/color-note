@@ -1,8 +1,8 @@
 // pages/mine/set.ts
-import WeCropper from "we-cropper";
-import { Options } from "../../../node_modules/we-cropper/types/options";
-import IWeCropper from "../../../node_modules/we-cropper/types/we-cropper";
 import { useInfoStore } from "../../store/index";
+import WeCropper from "../../miniprogram_modules/we-cropper/dist/we-cropper"
+import { Options } from "../../miniprogram_modules/we-cropper/types/options";
+import IWeCropper from "../../miniprogram_modules/we-cropper/types/we-cropper";
 const app = getApp<IAppOption>();
 const device = wx.getSystemInfoSync();
 const width = device.windowWidth;
@@ -36,7 +36,7 @@ type TMethod = {
 }
 // 定义自定义属性
 type TCustomInstanceProperty = {
-  wecropper: IWeCropper | null;
+  wecropper: IWeCropper;
 }
 type TIsPage = false
 Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
@@ -95,8 +95,8 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
       });
   
       // 实例化 WeCropper
-      const cropperOpt = this.data.cropperOpt as Options.ConstructorOption;
-      this.wecropper = (new WeCropper(cropperOpt) as unknown) as IWeCropper;
+      const cropperOpt = this.data.cropperOpt;
+      this.wecropper = new WeCropper(cropperOpt as Options.ConstructorOption) as unknown as IWeCropper;
       this.wecropper
         .on("ready", () => {
           console.log(`wecropper is ready for work`);
@@ -249,7 +249,7 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
               name: "updateUserInfo",
               data: data,
             })
-            .then((res) => {
+            .then(() => {
               // console.log(res);
               app.showToast(this, {});
               wx.setStorageSync("ui", {

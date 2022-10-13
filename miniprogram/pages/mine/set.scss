@@ -68,4 +68,9 @@
   background: #000;
   height: 100vh;
   z-index: 2;
+  .btn-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
 }

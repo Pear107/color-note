@@ -39,16 +39,16 @@ page {
   white-space: nowrap;
 }
 
+.btn{
+  margin: 40rpx 0;
+}
+
 .btn-confirm {
-  position: relative;
-  top: 40rpx;
   color: var(--text-color-white);
   background: var(--btn-bg-green);
 }
 
 .btn-cancel {
-  position: relative;
-  top: 40rpx;
   color: var(--text-color-white);
   background: var(--btn-bg-orange);
 }

@@ -18,7 +18,6 @@
     "backgroundTextStyle": "light",
     "navigationStyle": "custom"
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json",
   "plugins": {
     "chatbot": {
@@ -33,6 +32,7 @@
   "usingComponents": {
     "CustomNavigation":"/components/custom-navigation/index",
     "CustomToast":"/components/custom-toast/index",
-    "CustomModal": "/components/custom-modal/index"
+    "CustomModal": "/components/custom-modal/index",
+    "van-button": "@vant/weapp/button/index"
   }
 }

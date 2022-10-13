@@ -12,17 +12,11 @@
 │  │  └─tabBar
 │  └─scss
 ├─behavior
-├─cloudfunction
-│  ├─login
-│  ├─setUserInfo
-│  └─test
 ├─components
 │  ├─custom-modal
 │  ├─custom-navigation
 │  ├─custom-toast
 │  └─route-list
-├─miniprogram_modules
-│  └─we-cropper
 ├─pages
 │  ├─index
 │  ├─logs
