@@ -14,7 +14,7 @@
   align-items: center;
   position: relative;
   width: 100%;
-  background: var(--bg-color-white);
+  background: var(--white);
   &__item{
     display: flex;
     align-items: center;
@@ -22,7 +22,7 @@
     position: relative;
     width: 80%;
     height: 100rpx;
-    border-bottom: 1rpx solid var(--shadow-color-gray);
+    border-bottom: 1rpx solid var(--grey);
     &__rollBack{
       position: absolute;
       right: 0;
@@ -35,7 +35,7 @@
     bottom: 0%;
     width: inherit;
     height: 100%;
-    background: var(--bg-color-white);
+    background: var(--white);
     overflow: hidden;
     -webkit-transition: all ease-out .3s;
     transition: all ease-out .3s;
@@ -48,13 +48,13 @@
       border: 1vw solid transparent;
     }
     &__item.active{
-      border: 1vw solid var(--btn-bg-green);
+      border: 1vw solid var(--green);
     }
     .custom{
-      background: var(--bg-color);
+      background: var(--grey);
       text-align: center;
       line-height: 25vw;
-      color: var(--text-color-gray);
+      color: var(--black);
     }
   }
   .avatar.hidden{

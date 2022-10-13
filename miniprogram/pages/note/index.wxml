@@ -1,44 +1,56 @@
 <!--pages/note/index.wxml-->
 <wxs module="format">
   function formatTime(dt) {
-    dt=dt.replace('+08:00','')
-    dt=dt.replace('T',' ')
-    var currDate=getDate()
-    var noteDate=getDate(dt)
-    var monthes=[31,28,31,30,31,30,31,31,30,31,30,31]
-    if((currDate.getFullYear()%4===0&&currDate.getFullYear()%100!==0)||currDate.getFullYear()%400===0){
-      monthes[1]=29
+    var currDate = getDate();
+    var noteDate = dt.replace(getRegExp("-|:", "g"), " ").split(" ")
+    for (var i = 0; i < noteDate.length; i++) {
+      noteDate[i] = parseInt(noteDate[i])
     }
-    if(currDate.getFullYear()===noteDate.getFullYear()&&currDate.getMonth()===noteDate.getMonth()&&currDate.getDate()===noteDate.getDate()){
-      console.log('hello world')
-      return '今天 '+dt.split(' ')[1].split(':')[0]+':'+dt.split(' ')[1].split(':')[1]
-    }else if(currDate.getFullYear()===noteDate.getFullYear()&&currDate.getMonth()===noteDate.getMonth()&&currDate.getDate()===noteDate.getDate()+1){
-      return '昨天 '+dt.split(' ')[1].split(':')[0]+':'+dt.split(' ')[1].split(':')[1]
-    }else if(currDate.getFullYear()===noteDate.getFullYear()&&currDate.getMonth()===noteDate.getMonth()+1&&noteDate.getDate()===monthes[noteDate.getMonth()]){
-      return '昨天 '+dt.split(' ')[1].split(':')[0]+':'+dt.split(' ')[1].split(':')[1]
+    var monthes = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    if ((currDate.getFullYear() % 4 === 0 && currDate.getFullYear() % 100 !== 0) || currDate.getFullYear() % 400 === 0) {
+      monthes[1] = 29
     }
-    return dt.split(' ')[0]
+    if (currDate.getFullYear() === noteDate[0] && currDate.getMonth() + 1 === noteDate[1] && currDate.getDate() === noteDate[2]) {
+      return '今天 ' + noteDate[3] + ':' + noteDate[4] + ':' + noteDate[5]
+    } else if (currDate.getFullYear() === noteDate[0] && currDate.getMonth() + 1 === noteDate[1] && currDate.getDate() === noteDate[2] + 1) {
+      return '昨天 ' + noteDate[3] + ':' + noteDate[4] + ':' + noteDate[5]
+    } else if (currDate.getFullYear() === noteDate[0] && currDate.getMonth() === noteDate[1] && currDate.getDate() === 1 && noteDate[2] === monthes[noteDate[1] - 1]) {
+      return '昨天 ' + noteDate[3] + ':' + noteDate[4] + ':' + noteDate[5]
+    } else if (currDate.getFullYear() === noteDate[0] + 1 && currDate.getMonth() === 0 && noteDate[1] === 12 && currDate.getDate() === 1 && noteDate[2] === 31) {
+      return '昨天 ' + noteDate[3] + ':' + noteDate[4] + ':' + noteDate[5]
+    } else if (currDate.getFullYear() === noteDate[0]) {
+      return noteDate[0] + '-' + noteDate[1] + '-' + noteDate[2]
+    } else {
+      return noteDate[1] + '-' + noteDate[2]
+    }
   }
-  module.exports.formatTime=formatTime
+  module.exports.formatTime = formatTime
 </wxs>
 <view class="container tab-page">
   <CustomNavigation></CustomNavigation>
   <view class="c-search">
-    <input class="c-search__ipt f-box-shadow" maxlength="25" placeholder="搜索" placeholder-style="color:#721b6580;" />
-    <image class="c-search__btn" src="../../assets/images/search.png" />
-  </view>
-  <view class="c-noteList">
-    <view class="c-noteList__item f-box-shadow f-border-radius" wx:for="{{noteList}}" wx:key="index" bindtap="enterNote" data-id="{{noteList[index].NoteId}}" capture-bind:longpress="deleteNote">
-      <view class="u-icon"></view>
-      <view class="u-title f-ellipsis">{{noteList[index].NoteName}}</view>
-      <view class="u-text f-ellipsis">{{noteList[index].content}}</view>
-      <view class="u-time">{{format.formatTime(noteList[index].LastUpdate)}}</view>
+    <input class="c-search__ipt f-box-shadow" maxlength="25" placeholder="搜索" placeholder-style="color:#b53471;" />
+    <view class="c-search__btn">
+      <van-icon name="search" color="#b53471" size="32rpx" />
     </view>
   </view>
-  <view class="c-addBtn f-box-shadow" bindtap="addNote">
-    <view class="c-addBtn__item f-border-radius"></view>
-    <view class="c-addBtn__item f-border-radius"></view>
+  <view class="c-notes">
+    <view class="c-notes__item f-box-shadow f-border-radius" wx:for="{{notes}}" wx:for-item="item" wx:key="_id" bindtap="readNote" data-id="{{item.id}}" capture-bind:longpress="deleteNote">
+      <view class="u-icon">
+        <van-icon name="description" size="100rpx" color="#b53471" />
+      </view>
+      <view class="u-title f-ellipsis">{{item.title}}</view>
+      <view class="u-text f-ellipsis">{{item.content}}</view>
+      <view class="u-time">{{format.formatTime(item.time)}}</view>
+    </view>
   </view>
-  <CustomModal caption="是否删除" wx:if="{{isShowModal}}" bind:parentConfirm="confirm" bind:parentCancel="cancel"></CustomModal>
-  <CustomToast wx:if="{{isShowToast}}"></CustomToast>
+  <view class="c-addBtn f-box-shadow" bindtap="createNote">
+    <van-icon name="records" size="70rpx" color="#b53471" />
+  </view>
+  <CustomModal caption="是否删除"></CustomModal>
+  <CustomToast></CustomToast>
+  <view wx:if="{{notes.length === 0}}" class="empty">
+    <image class="empty_icon" src="../../assets/images/empty.png" />
+    <text class="empty_text">暂无内容</text>
+  </view>
 </view>

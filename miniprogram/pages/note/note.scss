@@ -1,10 +1,4 @@
 /* pages/note/write.wxss */
-.container {
-  position: relative;
-  background: linear-gradient(180deg, #ffd3a5, #fd6585);
-  overflow: hidden;
-}
-
 .c-write {
   display: grid;
   grid-template-rows: 1fr 1.5fr 16fr 1.5fr;
@@ -15,7 +9,7 @@
   height: 80vh;
   padding: 30rpx;
   box-sizing: border-box;
-  background: var(--bg-color-white);
+  background: var(--white);
   overflow: hidden;
 
   &__head {
@@ -32,8 +26,6 @@
       right: 0px;
       width: 48rpx;
       height: 48rpx;
-      --test:url(https://newgym.cn/color-note/save.png);
-      background: url(https://newgym.cn/color-note/save.png) no-repeat center/cover;
     }
   }
 
@@ -67,20 +59,6 @@
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
-
-    .u-icon {
-      width: 48rpx;
-      height: 48rpx;
-    }
-    .u-icon:nth-child(1){
-      background: url(https://newgym.cn/color-note/public.png) no-repeat center/cover;
-    }
-    .u-icon:nth-child(2){
-      background: url(https://newgym.cn/color-note/analyse.png) no-repeat center/cover;    
-    }
-    .u-icon:nth-child(3){
-      background: url(https://newgym.cn/color-note/image.png) no-repeat center/cover;    
-    }
   }
 }
 

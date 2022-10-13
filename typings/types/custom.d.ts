@@ -18,3 +18,10 @@ interface RouteData {
   name: string;
   route: string;
 }
+interface Notes {
+  _id: string;
+  openid: string;
+  title: string;
+  content: string;
+  time: string;
+}

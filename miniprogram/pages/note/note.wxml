@@ -4,7 +4,7 @@
   <view class="c-write f-border-radius">
     <view class="c-write__head">
       <input class="u-title" placeholder="标题" maxlength="8" model:value="{{title}}" />
-      <view class="u-icon" catchtap="save"></view>
+      <van-icon name="{{model === 'edit' ? 'edit' : 'eye-o'}}" size="48rpx" />
     </view>
     <view class="c-write__secondHead">
       <view class="u-time">{{datetime}}</view>
@@ -12,13 +12,15 @@
     </view>
     <editor id="editor" class="c-write__editor" placeholder="打算记点什么" show-img-size="true" bindstatuschange="onStatusChange" bindready="onEditorReady" bindinput="onEditorInput" bindtap="hiddenVarieties" read-only="{{false}}"></editor>
     <view class="c-write__operate">
-      <view class="u-icon" bindtap="public"></view>
-      <view class="u-icon" bindtap="analyse"></view>
-      <view class="u-icon" bindtap="insertImage"></view>
+      <van-icon name="scan" size="48rpx" bindtap="scan"/>
+      <van-icon name="upgrade" size="48rpx" bindtap="updateNote" />
+      <van-icon name="delete-o" size="48rpx" bindtap="deleteNote" />
+      <van-icon name="photo-o" size="48rpx" bindtap="insertImage" />
+      <van-icon name="share-o" size="48rpx" bindtap="share" />
     </view>
   </view>
   <view class="c-variety f-border-radius-big" wx:if="{{isShowVariety}}">
-    <view class="c-variety__item" wx:for="{{varieties}}" wx:key="index" style="--color:{{item.color}}"  data-name="{{item.name}}" data-color="{{item.color}}" bindtap="selectVariety">{{item.name}}</view>
+    <view class="c-variety__item" wx:for="{{varieties}}" wx:key="index" style="--color:{{item.color}}" data-name="{{item.name}}" data-color="{{item.color}}" bindtap="selectVariety">{{item.name}}</view>
     <view class="c-variety__item" data-name="未分类" data-color="" bindtap="selectVariety">未分类</view>
     <view class="c-variety__item">添加分类</view>
   </view>

@@ -11,8 +11,6 @@ type TData = {
 // 定义属性列表
 type TProperty = {};
 type TMethod = {
-  show: () => void;
-  hide: () => void;
   login: () => void;
 };
 // 定义自定义属性，或者是 behavior 的属性
@@ -50,10 +48,6 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
       { key: 6, name: "关于我们", route: "about" },
     ],
   },
-
-  /**
-   * 组件的生命周期
-   */
   lifetimes: {
     attached() {
       this.setData({
@@ -76,22 +70,7 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
       console.log("hidden");
     },
   },
-
-  /**
-   * 组件的方法列表
-   */
   methods: {
-    // tab 切换到当前页面触发
-    show() {
-      console.log("show");
-    },
-
-    // tab 切换到其他页面触发
-    hide() {
-      console.log("hide");
-    },
-
-    // 登录
     login() {
       if (!this.checkLogin()) {
         const ui: UserInfo = wx.getStorageSync("ui");

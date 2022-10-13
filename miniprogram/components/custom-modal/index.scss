@@ -22,12 +22,6 @@
   box-shadow: 0rpx 2rpx 14rpx 0rpx rgba(0, 0, 0, 0.06);
   border-radius: 16rpx;
   padding-top: 32rpx;
-  z-index: 999;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
-  overflow: hidden;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
   &__caption {
     margin-bottom: 22rpx;
   }
@@ -53,7 +47,7 @@
     width: 506rpx;
     margin-bottom: 100rpx;
     input{
-      background: var(--input-bg-color-gray);
+      background: #f1f2f6;
       height: 60rpx;
       border-radius: 30rpx;
       line-height: 60rpx;
@@ -79,13 +73,13 @@
     }
 
     .u-confirm {
-      background: var(--btn-bg-green);
-      color: var(--btn-text-color);
+      background: #2ecc71;
+      color: #fff;
     }
 
     .u-cancel {
-      background: var(--btn-bg-orange);
-      color: var(--btn-text-color);
+      background: #ff7f50;
+      color: #fff;
     }
   }
 }

@@ -1,6 +1,23 @@
 <!--custom-tab-bar/index.wxml-->
 <view class="tabBar">
-  <view class="item" wx:for="{{list}}" wx:for-index="index" wx:for-item="item" wx:key="index">
-    <image class="icon" src="{{tabIndex === index ? item.selectedIconPath : item.iconPath}}" data-index="{{index}}" catchtap="switchTab" />
+  <view class="item">
+    <view class="icon" bindtap="switchTab" data-index="{{0}}">
+      <van-icon name="apps-o" size="50rpx" color="{{tabIndex === 0 ? '#b53471' : ''}}" />
+    </view>
+  </view>
+  <view class="item">
+    <view class="icon" bindtap="switchTab" data-index="{{1}}">
+      <van-icon name="notes-o" size="50rpx" color="{{tabIndex === 1 ? '#b53471' : ''}}" />
+    </view>
+  </view>
+  <view class="item">
+    <view class="icon" bindtap="switchTab" data-index="{{2}}">
+      <van-icon name="sign" size="50rpx" color="{{tabIndex === 2 ? '#b53471' : ''}}" />
+    </view>
+  </view>
+  <view class="item">
+    <view class="icon" bindtap="switchTab" data-index="{{3}}">
+      <van-icon name="contact" size="50rpx" color="{{tabIndex === 3 ? '#b53471' : ''}}" />
+    </view>
   </view>
 </view>

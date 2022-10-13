@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "CustomNavigation":"../../components/custom-navigation/index",
+    "CustomToast":"../../components/custom-toast/index",
+    "ocr-navigator": "plugin://ocr-plugin/ocr-navigator"
+  }
+}

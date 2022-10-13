@@ -14,8 +14,14 @@
     flex: 1;
     height: 100%;
     .icon{
+      position: relative;
       width: 50rpx;
       height: 50rpx;
+      & :nth-child(n){
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
     }
   }
 }

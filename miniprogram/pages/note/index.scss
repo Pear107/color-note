@@ -1,6 +1,4 @@
 /* pages/note/index.wxss */
-@import '../../app.scss';
-
 .c-search {
   position: relative;
   display: flex;
@@ -12,32 +10,35 @@
     padding-left: 30rpx;
     border-radius: 30rpx;
     box-sizing: border-box;
-    background: var(--input-bg-color);
+    background: var(--white);
     font-size: 22rpx;
-    color: var(--base-color);
+    color: var(--base);
   }
 
   .c-search__ipt::-webkit-input-placeholder {
-    color: var(--base-color-light);
+    color: var(--base);
   }
 
   .c-search__ipt::-moz-placeholder {
-    color: var(--base-color-light);
+    color: var(--base);
   }
 
   .c-search__ipt:-ms-input-placeholder {
-    color: var(--base-color-light);
+    color: var(--base);
   }
 
   .c-search__ipt::-webkit-input-placeholder {
-    color: var(--base-color-light);
+    color: var(--base);
   }
 
   .c-search__ipt::placeholder {
-    color: var(--base-color-light);
+    color: var(--base);
   }
 
   .c-search__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     right: 30rpx;
     width: 32rpx;
@@ -45,7 +46,7 @@
   }
 }
 
-.c-noteList {
+.c-notes {
   display: flex;
   flex-flow: column nowrap;
   row-gap: 10rpx;
@@ -57,20 +58,18 @@
 
   &__item {
     height: 160rpx;
-    background: var(--bg-color-white-alpah8);
     display: grid;
     grid-template-columns: 2fr 5fr 3fr;
     grid-template-rows: 1.5fr 1fr;
     grid-template-areas: 'icon title time'
       'icon content content';
+      background: var(--white);
 
     .u-icon {
       grid-area: icon;
       place-self: center;
       width: 100rpx;
       height: 100rpx;
-      // background-color: #ff6b81;
-      background: url(https://newgym.cn/color-note/file.png) no-repeat center/cover;
     }
 
     .u-title {
@@ -85,7 +84,7 @@
       align-self: flex-start;
       font-size: 24rpx;
       color: #a4b0be;
-     
+
     }
 
     .u-time {
@@ -109,17 +108,20 @@
   justify-content: center;
   width: 100rpx;
   height: 100rpx;
-  background: var(--bg-color-white);
+  background: var(--white);
   border-radius: 50%;
+}
 
-  &__item {
-    position: absolute;
-    width: 70rpx;
-    height: 16rpx;
-    background: var(--base-color);
-  }
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 50vh;
+  transform: translateY(-50%);
 
-  &__item:nth-child(2) {
-    transform: rotate(90deg);
+  &_icon {
+    width: 300rpx;
+    height: 300rpx;
   }
 }

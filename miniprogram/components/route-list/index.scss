@@ -1,23 +1,32 @@
 /* components/custom-list/index.wxss */
-@import '../../app.scss';
 .container{
+  width: 100vw;
   padding: 20rpx 0;
   overflow-y: scroll;
-  background: var(--bg-color);
+  background: #f1f2f6;
 }
 .c-list{
   display: flex;
   flex-direction: column;
+  align-items: center;
   position: relative;
-  width: 702rpx;
-  background: var(--bg-color-white);
+  width: inherit;
+  border-radius: 60rpx;
+  z-index: 999;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  overflow: hidden;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
   &__item{
     height: 80rpx;
+    width: 90%;
     display: flex;
     column-gap: 10rpx;
     align-items: center;
     padding-left: 20rpx;
     box-sizing: border-box;
+    background: #fff;
     .u-icon{
       width: 26rpx;
       height: 26rpx;
@@ -25,12 +34,11 @@
     .u-text{
       font-size: 26rpx;
       line-height: 80rpx;
-      color: var(--font-color-white);
     }
   }
   &__item + &__item{
     border-width: 2rpx 0rpx 0rpx 0rpx;
-    border-color: var(--border-color-whitesmoke);
+    border-color: #f1f2f6;
     border-style: solid;
   }
 }
