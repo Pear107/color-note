@@ -10,11 +10,11 @@ Component({
    */
   data: {
     isShowToast: false,
-    icons: {
-      success: "../../assets/images/success.png",
-      error: "../../assets/images/error.png",
-    },
     icon: "success",
+    icons: {
+      "success": "passed",
+      "error": "closed"
+    },
     content: "success",
     timer: NaN,
   },

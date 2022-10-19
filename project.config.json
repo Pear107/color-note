@@ -16,7 +16,7 @@
     "urlCheck": true,
     "coverView": true,
     "es6": true,
-    "postcss": true,
+    "postcss": false,
     "lazyloadPlaceholderEnable": false,
     "preloadBackgroundData": false,
     "minified": true,

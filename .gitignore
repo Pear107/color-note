@@ -2,3 +2,4 @@ node_modules/
 miniprogram/miniprogram_npm/
 miniprogram/miniprogram_modules/
 miniprogram/cloudfunction/
+miniprogram/config

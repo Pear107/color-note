@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/note/index",
-    "pages/note/note",
     "pages/mine/index",
+    "pages/mine/set",
+    "pages/note/note",
+    "pages/note/index",
     "pages/variety/index",
     "pages/todo/index",
     "pages/variety/noteList",
@@ -10,7 +11,6 @@
     "pages/todo/todo",
     "pages/logs/logs",
     "pages/mine/calendar",
-    "pages/mine/set",
     "pages/mine/timeline",
     "pages/mine/handbook",
     "pages/mine/connection",

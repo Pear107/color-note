@@ -4,19 +4,18 @@
   <CustomNavigation showBack="{{true}}" backText="返回"></CustomNavigation>
   <CustomModal id="modal"></CustomModal>
   <CustomToast id="toast"></CustomToast>
-  <image class="avatarUrl" src="{{avatarUrl}}" />
+  <image class="avatar" src="{{avatarUrl}}" />
   <van-button class="btn" type="primary" bindtap="setAvatar">设置头像</van-button>
   <view class="set">
     <label class="set__item">
-      <text class="set__item__name">昵称</text>
-      <input class="set__item__input" value="{{nickName}}" placeholder="请输入昵称" maxlength="8" bindinput="inputNickName" />
-      <image class="set__item__rollBack" src="../../assets/images/rollBack.png" bindtap="rollBackName" />
+      <text>昵称</text>
+      <input value="{{nickName}}" placeholder="请输入昵称" maxlength="8" bindinput="inputNickName" />
+      <van-icon name="revoke" size="32rpx" />
     </label>
     <van-button class="btn" type="primary" bindtap="confirm">确认设置</van-button>
-    <view class="avatar {{isShowAvatar?'':'hidden'}}">
-      <image class="avatar__item {{selectIndex === index ? 'active' : ''}}" wx:for="{{avatar}}" wx:key="index" src="{{avatar[index]}}" catchtap="selectAvatar" data-index="{{index}}" />
-      <view class="avatar__item custom {{selectIndex === 7 ? 'active' : ''}}" bindtap="customAvatar">自定义</view>
-      <canvas id="canvas" canvas-id="canvas" hidden="{{true}}" type="2d"></canvas>
+    <view class="avatars {{isShowAvatar?'':'hidden'}}">
+      <image class="avatars__item {{selectIndex === index ? 'active' : ''}}" wx:for="{{avatar}}" wx:key="index" src="{{avatar[index]}}" catchtap="selectAvatar" data-index="{{index}}" />
+      <view class="avatars__item custom {{selectIndex === 7 ? 'active' : ''}}" bindtap="customAvatar">自定义</view>
       <van-button bindtap="rollBackAvatar" type="default" size="large">重置</van-button>
     </view>
   </view>
@@ -29,4 +28,6 @@
       <van-button class="btn" bindtap="cancelCropperImage" type="warning">取消选择</van-button>
     </view>
   </view>
+  <canvas class="canvas" type="2d" id="canvas" style="width: 100px;height: 100px;"></canvas>
+  <canvas class="canvas" canvas-id="canvas" style="width: 100px;height: 100px;"></canvas>
 </view>

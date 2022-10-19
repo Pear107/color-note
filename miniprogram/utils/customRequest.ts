@@ -1,43 +1,50 @@
-import CustomPromise from './customPromise'
-
-type METHOD = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'TRACE' | 'CONNECT' | undefined
-
-const baseURL = 'https://newgym.cn/colorNote'
-
-function CustomRequest(method: METHOD, url: string, data: any) {
-  return new CustomPromise(function (resolve: Function, reject: Function) {
-    const token = wx.getStorageSync('token')
-    let header: { [key: string]: string } = {
-      "X-WX-SERVICE": "koa-4wnf",
-      'content-type': 'application/x-www-form-urlencoded',
-      'token': token,
-      // 'Authorization':token
-    };
-    console.log(baseURL+url)
-    data = formatData(data)
-    return wx.cloud.callContainer({
-      "config": {
-        "env": "prod-1gewslsrc38b26eb"
+function CustomRequest(request: REQUEST) {
+  return new Promise((resolve: Function, reject: Function) => {
+    const {
+      url,
+      method = "POST",
+      header = {
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      "path": "/api/count",
-      "header": header,
-      "method": method,
-      "data": {
-        "action": "inc"
-      }
-    })
-  })
+      data = {},
+    } = request;
+    if (header?.["Content-Type"] === "application/x-www-form-urlencoded") {
+      wx.request({
+        url,
+        method,
+        header,
+        data: formatData(data),
+        success: (res: any) => {
+          resolve(res);
+        },
+        fail: (err: any) => {
+          reject(err);
+        },
+      });
+    } else {
+      wx.request({
+        url,
+        method,
+        header,
+        data,
+        success: (res: any) => {
+          resolve(res);
+        },
+        fail: (err: any) => {
+          reject(err);
+        },
+      });
+    }
+  });
 }
 
 function formatData(data: any) {
-  console.log(data)
-  let ret: string = ''
+  let ret: string = "";
   for (let key in data) {
-    ret += `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}&`
+    ret += `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}&`;
   }
-  ret = ret.substring(0, ret.lastIndexOf('&'));
-  console.log(ret)
-  return ret
+  ret = ret.substring(0, ret.lastIndexOf("&"));
+  return ret;
 }
 
-export default CustomRequest
+export default CustomRequest;

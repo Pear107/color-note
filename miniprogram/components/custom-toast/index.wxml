@@ -1,5 +1,5 @@
 <!--components/custom-toast/index.wxml-->
 <view id="toast" class="c-toast" wx:if="{{isShowToast}}">
-  <image class="c-toast__icon" src="{{icons[icon]}}" />
+  <van-icon icon="{{icons[icon]}}" size="80rpx"></van-icon>
   <view class="c-toast__text">{{content}}</view>
 </view>

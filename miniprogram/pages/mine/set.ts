@@ -1,6 +1,6 @@
 // pages/mine/set.ts
 import { useInfoStore } from "../../store/index";
-import WeCropper from "../../miniprogram_modules/we-cropper/dist/we-cropper"
+import WeCropper from "../../miniprogram_modules/we-cropper/dist/we-cropper";
 import { Options } from "../../miniprogram_modules/we-cropper/types/options";
 import IWeCropper from "../../miniprogram_modules/we-cropper/types/we-cropper";
 const app = getApp<IAppOption>();
@@ -18,8 +18,8 @@ type TData = {
   clip: boolean;
   avatarUrl: string;
   nickName: string;
-}
-type TProperty = {}
+};
+type TProperty = {};
 type TMethod = {
   setAvatar: () => void;
   selectAvatar: (e: any) => void;
@@ -33,12 +33,17 @@ type TMethod = {
   getCropperImage: () => void;
   cancelCropperImage: () => void;
   confirm: () => void;
-}
+  imageToBase64: (imageUrl: string) => Promise<string>;
+  getImageInfo: (
+    imageUrl: string
+  ) => Promise<WechatMiniprogram.GetImageInfoSuccessCallbackResult>;
+  canvasToFile: (canvasId: string, quality: number) => Promise<string>;
+};
 // 定义自定义属性
 type TCustomInstanceProperty = {
   wecropper: IWeCropper;
-}
-type TIsPage = false
+};
+type TIsPage = false;
 Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
   data: {
     ui: {
@@ -77,26 +82,28 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
     clip: false,
   },
   lifetimes: {
-    attached(){
+    attached() {
       const ui = wx.getStorageSync("ui");
       this.setData({
         ui: ui,
       });
       this.setData({
-        avatarUrl: useInfoStore.getData('avatarUrl'),
-        nickName: useInfoStore.getData('nickName'),
+        avatarUrl: useInfoStore.getData("avatarUrl"),
+        nickName: useInfoStore.getData("nickName"),
       });
-      useInfoStore.addPage(this)
+      useInfoStore.addPage(this);
       const selectIndex = this.data.avatar.findIndex((value: string) => {
         return value === this.data.avatarUrl;
       });
       this.setData({
         selectIndex: selectIndex,
       });
-  
+
       // 实例化 WeCropper
       const cropperOpt = this.data.cropperOpt;
-      this.wecropper = new WeCropper(cropperOpt as Options.ConstructorOption) as unknown as IWeCropper;
+      this.wecropper = (new WeCropper(
+        cropperOpt as Options.ConstructorOption
+      ) as unknown) as IWeCropper;
       this.wecropper
         .on("ready", () => {
           console.log(`wecropper is ready for work`);
@@ -111,7 +118,7 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
         .on("imageLoad", () => {
           wx.hideToast({});
         });
-    }
+    },
   },
   methods: {
     setAvatar() {
@@ -130,12 +137,13 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
     customAvatar() {
       const that = this;
       wx.chooseMedia({
-        mediaType: ["image"],
         count: 1,
+        mediaType: ["image"],
+        sourceType: ["album", "camera"],
+        camera: "back",
         success(res) {
-          // console.log(res.tempFiles[0])
-          const src = res.tempFiles[0].tempFilePath;
-          that.wecropper?.pushOrign(src);
+          const image = res.tempFiles[0];
+          that.wecropper?.pushOrign(image.tempFilePath);
           that.setData({
             clip: true,
           });
@@ -172,40 +180,21 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
       this.wecropper?.touchEnd(e);
     },
     getCropperImage() {
-      this.wecropper?.getCropperImage((tempFilePath: string) => {
-        // tempFilePath 为裁剪后的图片临时路径
-        if (tempFilePath) {
+      this.wecropper?.getCropperImage(async (imageUrl: string) => {
+        if (imageUrl) {
           // 预览图片
           // wx.previewImage({
           //   current: '',
           //   urls: [tempFilePath]
           // })
-          const query = wx.createSelectorQuery();
-          query
-            .select("#canvas")
-            .fields({
-              node: true,
-              size: true,
-            })
-            .exec((res) => {
-              const canvas = res[0].node;
-              const ctx = canvas.getContext("2d");
-              const img = canvas.createImage();
-              img.src = tempFilePath;
-              img.crossOrigin = "anonymous";
-              img.onload = () => {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0, img.width, img.height);
-                const avatarUrl = canvas.toDataURL("image/png");
-                this.setData({
-                  clip: false,
-                  isShowAvatar: false,
-                  avatarUrl: avatarUrl,
-                  selectIndex: 7,
-                });
-              };
-            });
+          const avatarUrl = await this.imageToBase64(imageUrl);
+          console.log(avatarUrl);
+          this.setData({
+            clip: false,
+            isShowAvatar: false,
+            avatarUrl: avatarUrl,
+            selectIndex: 7,
+          });
         } else {
           console.log("获取图片地址失败，请稍后重试");
         }
@@ -258,8 +247,8 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
                 avatarUrl: data.avatarUrl ?? this.data.ui.avatarUrl,
               });
               // console.log(wx.getStorageSync("ui"));
-              useInfoStore.setData('nickName', this.data.nickName)
-              useInfoStore.setData('avatarUrl', this.data.avatarUrl)
+              useInfoStore.setData("nickName", this.data.nickName);
+              useInfoStore.setData("avatarUrl", this.data.avatarUrl);
               wx.navigateBack({});
             })
             .catch((err) => {
@@ -272,6 +261,110 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
         }
       }
     },
-  }
+    imageToBase64(imageUrl) {
+      return new Promise((resolve, reject) => {
+        const query = wx.createSelectorQuery().in(this);
+        query
+          .select("#canvas")
+          .fields({
+            node: true,
+            size: true,
+          })
+          .exec(async (res) => {
+            const dom = res[0];
+            const imageInfo = await this.getImageInfo(imageUrl);
+            if (dom.node === null) {
+              const canvas: WechatMiniprogram.Canvas = dom.node;
+              const ctx: WechatMiniprogram.RenderingContext = canvas.getContext(
+                "2d"
+              );
+              console.log(ctx);
+              const img = canvas.createImage();
+              img.src = imageUrl;
+              // img.crossOrigin = "anonymous";
+              img.onload = () => {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                // @ts-ignore
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                if (imageInfo.type === "jpeg") {
+                  const avatarUrl = canvas.toDataURL("image/jpeg", 1);
+                  resolve(avatarUrl);
+                } else {
+                  const avatarUrl = canvas.toDataURL("image/jpeg", 0.92);
+                  resolve(avatarUrl);
+                }
+              };
+              img.onerror = () => {
+                reject("");
+              };
+            } else {
+              const ctx: WechatMiniprogram.CanvasContext = wx.createCanvasContext(
+                "canvas",
+                this
+              );
+              const quality = imageInfo.type === 'jpeg' ? 1 : 0.92
+              ctx.clearRect(0, 0, 100, 100);
+              //开始路径画圆,剪切处理
+              // ctx.save();
+              // ctx.beginPath();
+              // ctx.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2, false);
+              // ctx.clip(); //剪切路径
+              ctx.drawImage(imageUrl, 0, 0, 100, 100);
+              ctx.draw(false, async () => {
+                const imageUrl = await this.canvasToFile("canvas", quality)
+                wx.getFileSystemManager().readFile({
+                  filePath: imageUrl,
+                  encoding: "base64",
+                  success: (res) => {
+                    const base64 = `data:image/jpeg;base64,${res.data}`
+                    resolve(base64);
+                  },
+                  fail: (err) => {
+                    app.showToast(this, {
+                      content: "获取图片失败",
+                      icon: "error",
+                    });
+                    reject(err.errMsg);
+                  },
+                });
+              });
+            }
+          });
+      });
+    },
+    getImageInfo(imageUrl: string) {
+      return new Promise((resolve, reject) => {
+        wx.getImageInfo({
+          src: imageUrl,
+          success: (res) => {
+            resolve(res);
+          },
+          fail: (err) => {
+            reject(err.errMsg);
+          },
+        });
+      });
+    },
+    canvasToFile(canvasId: string, quality: number){
+      return new Promise((resolve, reject) => {
+        wx.canvasToTempFilePath({
+          canvasId: canvasId,
+          fileType: "jpg",
+          x: 0,
+          y: 0,
+          width: 100,
+          height: 100,
+          quality: quality,
+          success: (res) => {
+            resolve(res.tempFilePath);
+          },
+          fail: (err) => {
+            reject(err.errMsg);
+          },
+        });
+      })
+    }
+  },
 });
 export {};
