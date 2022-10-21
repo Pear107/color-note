@@ -4,12 +4,12 @@ export const formatTime = (date: Date) => {
   const day = date.getDate()
   const hour = date.getHours()
   const minute = date.getMinutes()
-  // const second = date.getSeconds()
+  const second = date.getSeconds()
 
   return (
     [year, month, day].map(formatNumber).join('-') +
     ' ' +
-    [hour, minute].map(formatNumber).join(':')
+    [hour, minute, second].map(formatNumber).join(':')
   )
 }
 

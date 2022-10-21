@@ -1,0 +1,92 @@
+var oneDay = 24 * 60 * 60 * 1000;
+
+function isToday(todayTime, time) {
+  var today = getDate(todayTime).setHours(0, 0, 0, 0);
+  var date = getDate(time).setHours(0, 0, 0, 0);
+  return today === date;
+}
+
+function isYesterday(todayTime, time) {
+  var today = getDate(todayTime).setHours(0, 0, 0, 0);
+  var date = getDate(time).setHours(0, 0, 0, 0);
+  return today === date + oneDay;
+}
+
+function isBeforeYesterday(todayTime, time) {
+  var today = getDate(todayTime).setHours(0, 0, 0, 0);
+  var date = getDate(time).setHours(0, 0, 0, 0);
+  return today === date + oneDay * 2;
+}
+
+function isThisWeek(todayTime, time) {
+  var date = getDate(time).toLocaleDateString();
+  var currTime = getDate(todayTime).getTime();
+  var currDate = getDate(todayTime).getDay();
+  for (var i = 0; i < 7; i++) {
+    if (
+      date === getDate(currTime + (i - currDate) * oneDay).toLocaleDateString()
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function isThisMonth(todayTime, time) {
+  var currYear = getDate(todayTime).getFullYear();
+  var year = getDate(time).getFullYear();
+  var currMonth = getDate(todayTime).getMonth();
+  var mouth = getDate(time).getMonth();
+  return currYear === year && currMonth === mouth;
+}
+
+function isThisYear(todayTime, time) {
+  var today = getDate(todayTime);
+  var date = getDate(time);
+  var currYear = today.getYear();
+  var year = date.getYear();
+  return currYear === year;
+}
+
+function formatNumber(n) {
+  s = n.toString();
+  return s[1] ? s : "0" + s;
+}
+
+function formatTime(time) {
+  var week = [
+    "星期天",
+    "星期一",
+    "星期二",
+    "星期三",
+    "星期四",
+    "星期五",
+    "星期六",
+  ];
+  var date = getDate(time);
+  var today = getDate();
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = formatNumber(date.getHours());
+  var minute = formatNumber(date.getMinutes());
+  var second = formatNumber(date.getSeconds());
+  var weekDay = week[date.getDay()];
+  if (isToday(today, date)) {
+    return "今天" + " " + hour + ":" + minute + ":" + second;
+  } else if (isYesterday(today, date)) {
+    return "昨天" + " " + hour + ":" + minute + ":" + second;
+  } else if (isBeforeYesterday(today, date)) {
+    return "前天" + " " + hour + ":" + minute + ":" + second;
+  } else if (isThisWeek(today, date)) {
+    return weekDay + " " + hour + ":" + minute;
+  } else if (isThisMonth(today, date)) {
+    return "当月" + "-" + day + " " + hour + ":" + minute;
+  } else if (isThisYear(today, date)) {
+    return month + "-" + day;
+  } else {
+    return year + "-" + month + "-" + day;
+  }
+}
+
+module.exports.formatTime = formatTime;

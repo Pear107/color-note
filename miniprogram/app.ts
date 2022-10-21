@@ -60,7 +60,6 @@ App<IAppOption>({
         }
       }
     })
-
   },
   showModal(that: any, options: CustomModal){
     that.selectComponent('#modal').showModal(options??{})

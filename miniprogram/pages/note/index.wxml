@@ -1,5 +1,5 @@
 <!--pages/note/index.wxml-->
-<wxs module="format">
+<!-- <wxs module="format">
   function formatTime(dt) {
     var currDate = getDate();
     var noteDate = dt.replace(getRegExp("-|:", "g"), " ").split(" ")
@@ -25,7 +25,8 @@
     }
   }
   module.exports.formatTime = formatTime
-</wxs>
+</wxs> -->
+<wxs src="../../utils/util.wxs" module="format" />
 <view class="container tab-page">
   <CustomNavigation></CustomNavigation>
   <view class="c-search">

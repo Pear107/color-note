@@ -1,6 +1,7 @@
 // pages/mine/index.ts
 import { useInfoStore } from "../../store/index";
 import checkLogin from "../../behavior/checkLogin";
+import Log4j from "../../utils/log4j";
 // 定义初始数据类型
 type TData = {
   nickName: string;
@@ -59,16 +60,18 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
   },
   pageLifetimes: {
     show() {
-      console.log("show");
       if (typeof this.getTabBar === "function" && this.getTabBar()) {
         this.getTabBar().setData({
           tabIndex: 3,
         });
       }
+      Log4j.debug("he", {});
+      Log4j.error("he", {});
+      Log4j.info("he", {});
+      Log4j.log("he", {});
+      Log4j.warn("he", {});
     },
-    hide() {
-      console.log("hidden");
-    },
+    hide() {},
   },
   methods: {
     login() {

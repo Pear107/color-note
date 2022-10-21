@@ -1,15 +1,34 @@
-type METHOD = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'TRACE' | 'CONNECT'
-type ContentType = 'application/json;charset=UTF-8' | 'application/x-www-form-urlencoded'
+type METHOD =
+  | "GET"
+  | "POST"
+  | "PUT"
+  | "DELETE"
+  | "OPTIONS"
+  | "HEAD"
+  | "TRACE"
+  | "CONNECT";
+type ContentType =
+  | "application/json;charset=UTF-8"
+  | "application/x-www-form-urlencoded";
 interface HEADER {
-  'Content-Type'?: ContentType
+  "Content-Type"?: ContentType;
 }
 interface REQUEST {
   url: string;
   method?: METHOD;
   header?: HEADER;
   data?: any;
-} 
-type color = "#c88f23" | "#b99192" | "#b5c07b" | "#dd8270" | "#bccdbb";
+}
+type Color = "#c88f23" | "#b99192" | "#b5c07b" | "#dd8270" | "#bccdbb";
+type Log4jType =
+  | "debug"
+  | "error"
+  | "group"
+  | "groupEnd"
+  | "info"
+  | "log"
+  | "table"
+  | "warn";
 interface CustomModal {
   caption: string;
   content?: string;

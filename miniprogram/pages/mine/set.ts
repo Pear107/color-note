@@ -182,11 +182,6 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
     getCropperImage() {
       this.wecropper?.getCropperImage(async (imageUrl: string) => {
         if (imageUrl) {
-          // 预览图片
-          // wx.previewImage({
-          //   current: '',
-          //   urls: [tempFilePath]
-          // })
           const avatarUrl = await this.imageToBase64(imageUrl);
           console.log(avatarUrl);
           this.setData({
@@ -205,7 +200,7 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
         clip: false,
       });
     },
-    confirm() {
+    async confirm() {
       if (this.data.nickName.trim() === "") {
         app.showModal(this, {
           caption: "错误",
@@ -233,31 +228,24 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
           if (this.data.ui.avatarUrl !== this.data.avatarUrl) {
             data.avatarUrl = this.data.avatarUrl;
           }
-          wx.cloud
-            .callFunction({
-              name: "updateUserInfo",
-              data: data,
-            })
-            .then(() => {
-              // console.log(res);
-              app.showToast(this, {});
-              wx.setStorageSync("ui", {
-                openid: this.data.ui.openid,
-                nickName: data.nickName ?? this.data.ui.nickName,
-                avatarUrl: data.avatarUrl ?? this.data.ui.avatarUrl,
-              });
-              // console.log(wx.getStorageSync("ui"));
-              useInfoStore.setData("nickName", this.data.nickName);
-              useInfoStore.setData("avatarUrl", this.data.avatarUrl);
-              wx.navigateBack({});
-            })
-            .catch((err) => {
-              console.log(err);
-              app.showToast(this, {
-                icon: "error",
-                content: "error",
-              });
+          try{
+            await wx.cloud.callFunction({name: ''})
+            app.showToast(this, {});
+            wx.setStorageSync("ui", {
+              openid: this.data.ui.openid,
+              nickName: data.nickName ?? this.data.ui.nickName,
+              avatarUrl: data.avatarUrl ?? this.data.ui.avatarUrl,
             });
+            useInfoStore.setData("nickName", this.data.nickName);
+            useInfoStore.setData("avatarUrl", this.data.avatarUrl);
+            wx.navigateBack({});
+          }catch(err){
+            console.log(err.errMsg)
+            app.showToast(this, {
+              icon: "error",
+              content: "error",
+            });
+          }
         }
       }
     },
@@ -305,11 +293,6 @@ Component<TData, TProperty, TMethod, TCustomInstanceProperty, TIsPage>({
               );
               const quality = imageInfo.type === 'jpeg' ? 1 : 0.92
               ctx.clearRect(0, 0, 100, 100);
-              //开始路径画圆,剪切处理
-              // ctx.save();
-              // ctx.beginPath();
-              // ctx.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2, false);
-              // ctx.clip(); //剪切路径
               ctx.drawImage(imageUrl, 0, 0, 100, 100);
               ctx.draw(false, async () => {
                 const imageUrl = await this.canvasToFile("canvas", quality)
