@@ -25,9 +25,6 @@ const head: {
   warn: "🚧[WARN]",
 };
 const print: (type: Log4jType, content?: any) => void = (type, content) => {
-  if (!isDebug) {
-    return;
-  }
   const time = formatTime(new Date());
   console.log(
     "%c%s %c%s",
@@ -38,29 +35,45 @@ const print: (type: Log4jType, content?: any) => void = (type, content) => {
     ...content
   );
 };
-export default class Log4j {
+class Log4j {
+  private static isDebug = false;
   static debug(...content: Array<any>) {
-    print("debug", content);
+    this.isDebug ? print("debug", content) : {};
   }
   static error(...content: Array<any>) {
-    print("error", content);
+    this.isDebug ? print("error", content) : {};
   }
   static group(...content: Array<any>) {
-    print("group", content);
+    this.isDebug ? print("group", content) : {};
   }
   static groupEnd() {
-    print("groupEnd");
+    this.isDebug ? print("groupEnd") : {};
   }
   static info(...content: Array<any>) {
-    print("info", content);
+    this.isDebug ? print("info", content) : {};
   }
   static log(...content: Array<any>) {
-    print("log", content);
+    this.isDebug ? print("log", content) : {};
   }
   static table(...content: Array<any>) {
-    print("log", content);
+    this.isDebug ? print("log", content) : {};
   }
   static warn(...content: Array<any>) {
-    print("warn", content);
+    this.isDebug ? print("warn", content) : {};
   }
 }
+Object.defineProperty(Log4j, "isDebug", {
+  writable: false,
+  configurable: false,
+  enumerable: false,
+});
+export default Log4j;
+// Object.preventExtensions(Log4j)
+// Object.seal(Log4j)
+// Object.freeze(Log4j)
+// function t(){
+//   console.log(this.isDebug)
+//   this.isDebug = false
+//   console.log(this.isDebug)
+// }
+// Log4j.info(t.apply(Log4j))
